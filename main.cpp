@@ -1,75 +1,76 @@
 #include "Player.h"
 #include "Bullet.h"
+#include "BulletEngine.h"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
 
 using namespace std;
+using namespace sf;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(900, 720), "Limitus: Imaginatus");
-	sf::RenderWindow* win = &window;
+    RenderWindow window(VideoMode(900, 720), "Limitus: Imaginatus");
+	RenderWindow* win = &window;
 
-	sf::RectangleShape shape(sf::Vector2f(300, 720));
-	shape.setFillColor(sf::Color::Color(100,40,40,255));
+	RectangleShape shape(Vector2f(300, 720));
+	shape.setFillColor(Color::Color(100,40,40,255));
 	shape.setPosition(600,0);
 	
-	sf::Sprite _background;
-	sf::Texture background;
+	Sprite _background;
+	Texture background;
 	background.loadFromFile("background.png");
 	_background.setTexture(background);
 
-	sf::Texture texture;
-	sf::Texture* tex = &texture;
+	Texture texture;
+	Texture* tex = &texture;
 	texture.loadFromFile("alus.png");
     
-	sf::Clock clock;
+	Clock clock;
 	
-	Player player(sf::Vector2f(268,600), 40, tex, sf::IntRect(0,0,64,64));
-	vector<Bullet> blist;
-	vector<Bullet>::iterator it;
+	Player player(Vector2f(268,600), 40, tex, IntRect(0,0,64,64));
+
+	vector<BulletEngine*> bEngine;
+	vector<BulletEngine*>::iterator bIt;
 
 	while (window.isOpen())
     {
-		sf::Event event;
+		Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == Event::Closed)
                 window.close();
         }
-
-		if(sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		
+		if(Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			sf::Vector2i mpos = sf::Mouse::getPosition();
-			sf::Vector2f mpof;
-			mpof.x = mpos.x;
-			mpof.y = mpos.y;
-
-			Bullet b1(mpof, 50, 0, tex, sf::IntRect(32,32,8,8));
-			blist.push_back(b1);
+			BulletEngine* engine1 = new BulletEngine(tex, 8);
+			bEngine.push_back(engine1);
 		}
-		sf::Time elapsed = clock.getElapsedTime();
+		Time elapsed = clock.getElapsedTime();
 		float dt = 0.00001f*elapsed.asMicroseconds();
 		clock.restart();
 
-
-		for(it = blist.begin(); it != blist.end(); it++)
+		for(bIt = bEngine.begin(); bIt != bEngine.end(); bIt++)
 		{
-			it->Update(dt);
+			(*bIt)->update(dt);
 		}
-		player.Update(dt);
+
+		player.update(dt);
+
 		cout << dt << endl;
 
         window.clear();
-		window.draw(shape);
+		
 		window.draw(_background);
+		
 		player.draw(win);
-		for(it = blist.begin(); it != blist.end(); it++)
+		for(bIt = bEngine.begin(); bIt != bEngine.end(); bIt++)
 		{
-			it->draw(win);
+			(*bIt)->draw(win);
 		}
+		window.draw(shape);
         window.display();
     }
 

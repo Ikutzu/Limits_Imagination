@@ -1,14 +1,22 @@
 #pragma once
-#include "gameobject.h"
+#include "GameObject.h"
+#include "Bullet.h"
+
+#include <SFML\System.hpp>
+#include <SFML\Graphics.hpp>
+#include <iostream>
+
+using namespace std;
+using namespace sf;
+
 class Player :
 	public GameObject
 {
 public:
-	//Player(float x, float y, float speed, sf::Texture tex, sf::IntRect sprite);
-	Player(sf::Vector2f position, float speed, sf::Texture *tex, sf::IntRect sprite);
+	Player(Vector2f position, float speed, Texture *tex, IntRect sprite);
 	~Player(void);
 
-	void Update(float dt);
+	void update(float dt);
 
 private:
 	

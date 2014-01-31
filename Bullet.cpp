@@ -1,19 +1,37 @@
 #include "Bullet.h"
 #include <cmath>
 
-Bullet::Bullet(sf::Vector2f position, float speed, float angle, sf::Texture *tex, sf::IntRect sprite) : GameObject(position, speed, tex, sprite)
+static const float degree = 3.141592653589793/180;
+
+Bullet::Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite) : GameObject(position, speed, tex, sprite)
 {
-	this->angle = angle;
+	life = 0;
+	angle = direction;
 }
 
 
-Bullet::~Bullet(void)
+Bullet::~Bullet()
 {
+	
 }
 
 
-void Bullet::Update(float dt)
+void Bullet::update(float dt)
 {
-	position.x += speed*dt*cos(angle);
-	position.y += speed*dt*sin(angle);
+	life+=dt;
+
+	position.x += speed*dt*cos(angle*degree);
+	position.y += speed*dt*sin(angle*degree);
+	
+	sprite.setPosition(position);
+
+	if(life > 4)
+	{
+		
+	}
+}
+
+float const Bullet::returnLife()
+{
+	return life;
 }

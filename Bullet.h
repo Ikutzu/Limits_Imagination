@@ -1,15 +1,20 @@
 #pragma once
 #include "gameobject.h"
+
+using namespace sf;
+
 class Bullet :
 	public GameObject
 {
 public:
-	Bullet(sf::Vector2f position, float speed, float direction, sf::Texture *tex, sf::IntRect sprite);
+	Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite);
 	~Bullet(void);
 
-	void Update(float dt);
+	float const returnLife();
+	void update(float dt);
 
 private:
 	float angle;
+	float life;
 };
 

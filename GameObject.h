@@ -2,21 +2,24 @@
 
 #include <SFML\System.hpp>
 #include <SFML\Graphics.hpp>
+
+using namespace sf;
+
 class GameObject
 {
 public:
 	//float x, float y, float speed, sf::Texture tex, sf::IntRect sprite
-	GameObject(sf::Vector2f position, float speed, sf::Texture* tex, sf::IntRect sprite);
+	GameObject(Vector2f position, float speed, Texture* tex, IntRect sprite);
 	~GameObject(void);
 
-	sf::Vector2f getPosition();
-	virtual void Update(float dt);
-	void draw(sf::RenderWindow* window);
+	Vector2f getPosition();
+	void virtual update(float dt);
+	void const draw(RenderWindow* window);
 
 protected:
-	sf::Vector2f position;
+	Vector2f position;
 	float speed;
-	sf::Sprite sprite;
-	sf::FloatRect borders;
+	Sprite sprite;
+	FloatRect borders;
 };
 
