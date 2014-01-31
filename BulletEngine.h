@@ -14,6 +14,7 @@ public:
 
 	void update(float dt);
 	void draw(RenderWindow* window);
+	bool isEmpty;
 
 private:
 	vector<Bullet*> bulletL;
@@ -21,5 +22,6 @@ private:
 	vector<float> angles;
 	vector<float>::iterator ait;
 	float angle;
+
 };
 

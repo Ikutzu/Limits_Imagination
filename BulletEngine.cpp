@@ -3,6 +3,7 @@
 
 BulletEngine::BulletEngine(Texture *tex, int ammount)
 {
+	isEmpty = false;
 	angle = 0;
 	for(int i = 0; i < ammount; i++)
 	{
@@ -42,6 +43,7 @@ void BulletEngine::update(float dt)
 	bulletL.shrink_to_fit();
 	if (bulletL.begin() == bulletL.end())
 	{
+		isEmpty = true;
 	}
 }
 

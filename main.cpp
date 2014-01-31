@@ -45,18 +45,28 @@ int main()
 		
 		if(Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			BulletEngine* engine1 = new BulletEngine(tex, 8);
+			BulletEngine *engine1 = new BulletEngine(tex, 8);
 			bEngine.push_back(engine1);
 		}
 		Time elapsed = clock.getElapsedTime();
 		float dt = 0.00001f*elapsed.asMicroseconds();
 		clock.restart();
 
-		for(bIt = bEngine.begin(); bIt != bEngine.end(); bIt++)
+		for(bIt = bEngine.begin(); bIt != bEngine.end();)
 		{
 			(*bIt)->update(dt);
+			if (!(*bIt)->isEmpty)
+			{
+				bIt++;
+			}
+			else
+			{
+				(*bIt)->~BulletEngine();
+				bIt = bEngine.erase(bIt);
+			}
 		}
 
+		bEngine.shrink_to_fit();
 		player.update(dt);
 
 		cout << dt << endl;
