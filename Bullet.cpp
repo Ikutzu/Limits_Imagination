@@ -24,11 +24,6 @@ void Bullet::update(float dt)
 	position.y += speed*dt*sin(angle*degree);
 	
 	sprite.setPosition(position);
-
-	if(life > 4)
-	{
-		
-	}
 }
 
 float const Bullet::returnLife()
