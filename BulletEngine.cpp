@@ -28,7 +28,7 @@ void BulletEngine::update(float dt)
 {
 	for(bit = bulletL.begin(); bit != bulletL.end();)
 	{
-		(*bit)->update(dt);
+		(*bit)->update(dt, 10);
 		
 		if ((*bit)->returnLife() < 10)
 		{

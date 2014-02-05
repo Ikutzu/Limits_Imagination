@@ -11,10 +11,12 @@ public:
 	~Bullet(void);
 
 	float const returnLife();
-	void update(float dt);
+	void update(float dt, float newAngle);
+	float changeAngle(float newAngle);
 
 private:
 	float angle;
 	float life;
+	float origAngle;
 };
 

@@ -45,7 +45,7 @@ int main()
 		
 		if(Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			BulletEngine *engine1 = new BulletEngine(tex, 40);
+			BulletEngine *engine1 = new BulletEngine(tex, 8);
 			bEngine.push_back(engine1);
 		}
 		Time elapsed = clock.getElapsedTime();
