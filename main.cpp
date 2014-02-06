@@ -33,6 +33,8 @@ int main()
 
 	vector<BulletEngine*> bEngine;
 	vector<BulletEngine*>::iterator bIt;
+	
+	float shoot=0;
 
 	while (window.isOpen())
     {
@@ -42,16 +44,22 @@ int main()
             if (event.type == Event::Closed)
                 window.close();
         }
+
+		
 		
 		if(Keyboard::isKeyPressed(Keyboard::Space))
 		{
-			BulletEngine *engine1 = new BulletEngine(tex, 8);
-			bEngine.push_back(engine1);
+			if(shoot <= 0)
+			{
+				BulletEngine *engine1 = new BulletEngine(tex, 8);
+				bEngine.push_back(engine1);
+				shoot=1;
+			}
 		}
 		Time elapsed = clock.getElapsedTime();
 		float dt = 0.00001f*elapsed.asMicroseconds();
 		clock.restart();
-
+		shoot-=dt;
 		for(bIt = bEngine.begin(); bIt != bEngine.end();)
 		{
 			(*bIt)->update(dt);
@@ -69,7 +77,7 @@ int main()
 		bEngine.shrink_to_fit();
 		player.update(dt);
 
-		cout << dt << endl;
+		cout << dt*0.1 << endl;
 
         window.clear();
 		

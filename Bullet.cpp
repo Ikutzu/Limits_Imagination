@@ -21,10 +21,10 @@ void Bullet::update(float dt, float newAngle)
 {
 	life+=dt;
 	
-	changeAngle(newAngle);
+	//changeAngle(newAngle);
 
-	position.x += speed*dt*cos(angle*degree);
-	position.y += speed*dt*sin(angle*degree);
+	position.x += speed*dt*cos(changeAngle(newAngle)*degree);
+	position.y += speed*dt*sin(changeAngle(newAngle)*degree);
 	
 	sprite.setPosition(position);
 }
@@ -33,13 +33,13 @@ float Bullet::changeAngle(float newAngle)
 {
 	if(angle >= 360)
 	{
-		angle=0;
+		angle=0+angle-360;
 	}
 	if(angle < 0)
 	{
-		angle = 360;
+		angle = 360+angle;
 	}
-		angle-=sinh(degree*newAngle);
+		angle+=sin(degree*newAngle);
 		return angle;
 }
 
