@@ -9,7 +9,7 @@ using namespace sf;
 class BulletEngine
 {
 public:
-	BulletEngine(Texture *tex, int ammount);
+	BulletEngine(int ammount);
 	~BulletEngine(void);
 
 	void update(float dt);

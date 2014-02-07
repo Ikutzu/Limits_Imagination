@@ -13,7 +13,7 @@ class Player :
 	public GameObject
 {
 public:
-	Player(Vector2f position, float speed, Texture *tex, IntRect sprite);
+	Player(Vector2f position, float speed, IntRect sprite);
 	~Player(void);
 
 	void update(float dt);

@@ -1,6 +1,8 @@
 #include "Player.h"
+#include "Enemy.h"
 #include "Bullet.h"
 #include "BulletEngine.h"
+#include "Globals.h"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -8,6 +10,7 @@
 
 using namespace std;
 using namespace sf;
+
 
 int main()
 {
@@ -23,19 +26,23 @@ int main()
 	background.loadFromFile("background.png");
 	_background.setTexture(background);
 
-	Texture texture;
-	Texture* tex = &texture;
+	
 	texture.loadFromFile("alus.png");
-    
+	
 	Clock clock;
 	
-	Player player(Vector2f(268,600), 40, tex, IntRect(0,0,64,64));
+	Player player(Vector2f(268,600), 40, IntRect(0,0,64,64));
 
 	vector<BulletEngine*> bEngine;
 	vector<BulletEngine*>::iterator bIt;
 	
+	vector<Enemy*> enemies;
+	vector<Enemy*>::iterator eit;
+
 	float shoot=0;
 
+	float enemySpawnTimer=0;
+	
 	while (window.isOpen())
     {
 		Event event;
@@ -45,21 +52,30 @@ int main()
                 window.close();
         }
 
-		
-		
+
 		if(Keyboard::isKeyPressed(Keyboard::Space))
 		{
 			if(shoot <= 0)
 			{
-				BulletEngine *engine1 = new BulletEngine(tex, 8);
+				BulletEngine *engine1 = new BulletEngine(20);
 				bEngine.push_back(engine1);
 				shoot=1;
 			}
 		}
+
+		if(enemySpawnTimer <= 0)
+		{
+			Enemy *enemy = new Enemy(Vector2f(100,100), 30, IntRect(0,0,64,64));
+			enemies.push_back(enemy);
+			enemySpawnTimer = 50;
+			cout << "Enemy Spawns!!" << endl;
+		}
+
 		Time elapsed = clock.getElapsedTime();
 		float dt = 0.00001f*elapsed.asMicroseconds();
 		clock.restart();
 		shoot-=dt;
+		enemySpawnTimer-=dt;
 		for(bIt = bEngine.begin(); bIt != bEngine.end();)
 		{
 			(*bIt)->update(dt);
@@ -73,11 +89,15 @@ int main()
 				bIt = bEngine.erase(bIt);
 			}
 		}
-
 		bEngine.shrink_to_fit();
-		player.update(dt);
 
-		cout << dt*0.1 << endl;
+		for(eit=enemies.begin(); eit != enemies.end(); eit++)
+		{
+			(*eit)->update(dt,0);
+		}
+		player.update(dt);
+		
+		//cout << dt*0.1 << endl;
 
         window.clear();
 		
@@ -87,6 +107,10 @@ int main()
 		for(bIt = bEngine.begin(); bIt != bEngine.end(); bIt++)
 		{
 			(*bIt)->draw(win);
+		}
+		for(eit=enemies.begin(); eit != enemies.end(); eit++)
+		{
+			(*eit)->draw(win);
 		}
 		window.draw(shape);
         window.display();

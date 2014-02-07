@@ -1,7 +1,8 @@
 #include "BulletEngine.h"
+#include "Globals.h"
 
 
-BulletEngine::BulletEngine(Texture *tex, int ammount)
+BulletEngine::BulletEngine(int ammount)
 {
 	isEmpty = false;
 	angle = 0;
@@ -12,7 +13,7 @@ BulletEngine::BulletEngine(Texture *tex, int ammount)
 	}
 	for(ait = angles.begin(); ait != angles.end(); ait++)
 	{
-		Bullet *bullet = new Bullet(Vector2f(300,300), 50, *ait, tex, sf::IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(Vector2f(300,300), 50, *ait, sf::IntRect(64,0,16,16));
 		bulletL.push_back(bullet);
 	}
 	
@@ -30,7 +31,7 @@ void BulletEngine::update(float dt)
 	{
 		(*bit)->update(dt, 10);
 		
-		if ((*bit)->returnLife() < 100)
+		if (!(*bit)->isDead())
 		{
 			bit++;
 		}
