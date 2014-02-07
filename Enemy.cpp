@@ -22,9 +22,15 @@ void Enemy::update(float dt, float newAngle)
 	position.y += speed*dt*sin(changeAngle(newAngle)*degree);
 	
 	sprite.setPosition(position);
+	
+	if (position.x < GAME_WINDOW.left-64 || position.x > GAME_WINDOW.width+64 ||
+		position.y < GAME_WINDOW.top-64  || position.y > GAME_WINDOW.height+64)
+		dead = true;
+	
 	if(shootTimer <= 0)
 	{
-		//Bullet *bullet = new Bullet(position, 40, angle, tex, IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(position, 40, angle, tex, IntRect(64,0,16,16));
+		
 	}
 }
 

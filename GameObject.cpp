@@ -5,6 +5,7 @@ GameObject::GameObject(Vector2f position, float speed, Texture* tex, IntRect spr
 	this->position = position;
 	this->speed = speed;
 
+	this->tex = tex;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
 	borders = this->sprite.getGlobalBounds();

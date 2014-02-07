@@ -18,11 +18,11 @@ public:
 	bool isDead();
 
 protected:
+	Texture* tex;
 	Vector2f position;
 	float speed;
 	Sprite sprite;
 	FloatRect borders;
 	bool dead;
-	
 };
 
