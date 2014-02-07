@@ -15,11 +15,14 @@ public:
 	Vector2f getPosition();
 	void virtual update(float dt);
 	void const draw(RenderWindow* window);
+	bool isDead();
 
 protected:
 	Vector2f position;
 	float speed;
 	Sprite sprite;
 	FloatRect borders;
+	bool dead;
+	
 };
 

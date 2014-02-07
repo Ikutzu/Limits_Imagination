@@ -30,7 +30,7 @@ void BulletEngine::update(float dt)
 	{
 		(*bit)->update(dt, 10);
 		
-		if ((*bit)->returnLife() < 100)
+		if (!(*bit)->isDead())
 		{
 			bit++;
 		}
