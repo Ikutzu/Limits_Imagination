@@ -11,6 +11,7 @@ GameObject::GameObject(Vector2f position, float speed, Texture* tex, IntRect spr
 	this->tex = tex;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
+	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
 	borders = this->sprite.getGlobalBounds();
 	dead=false;
 }

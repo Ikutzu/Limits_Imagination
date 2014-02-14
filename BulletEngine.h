@@ -2,6 +2,7 @@
 #include "Bullet.h"
 
 #include <vector>
+#include <SFML\System.hpp>
 
 using namespace std;
 using namespace sf;
@@ -10,7 +11,7 @@ class BulletEngine
 {
 public:
 	BulletEngine();
-	BulletEngine(Texture *tex, int ammount);
+	BulletEngine(Vector2f pos, Texture *tex, int ammount);
 	~BulletEngine(void);
 
 	void update(float dt);
@@ -20,6 +21,7 @@ public:
 
 private:
 	
+	Vector2f position;
 	vector<Bullet*> bulletL;
 	vector<Bullet*>::iterator bit;
 	vector<float> angles;

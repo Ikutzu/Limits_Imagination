@@ -39,5 +39,8 @@ private:
 	
 	vector<BulletEngine*> bEngine;
 	vector<BulletEngine*>::iterator bIt;
+
+	void updateEnemy(float dt);
+	void updateBullet(float dt);
 };
 

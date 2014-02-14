@@ -4,7 +4,7 @@
 BulletEngine::BulletEngine()
 {}
 
-BulletEngine::BulletEngine(Texture *tex, int ammount)
+BulletEngine::BulletEngine(Vector2f pos, Texture *tex, int ammount)
 {
 	isEmpty = false;
 	
@@ -16,7 +16,7 @@ BulletEngine::BulletEngine(Texture *tex, int ammount)
 	}
 	for(ait = angles.begin(); ait != angles.end(); ait++)
 	{
-		Bullet *bullet = new Bullet(Vector2f(300,300), 50, *ait, tex, sf::IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(pos, 30, *ait, tex, sf::IntRect(64,0,16,16));
 		bulletL.push_back(bullet);
 	}
 	
@@ -58,10 +58,11 @@ void BulletEngine::update(float dt)
 			bit = bulletL.erase(bit);
 		}
 	}
-	if(bulletL.begin() == bulletL.end())
-		isEmpty = true;
 
 	bulletL.shrink_to_fit();
+	
+	if(bulletL.begin() == bulletL.end())
+		isEmpty = true;
 }
 
 void BulletEngine::draw(RenderWindow* window)

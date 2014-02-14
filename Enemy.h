@@ -10,6 +10,8 @@ public:
 
 	void update(float dt, float newAngle);
 	float changeAngle(float newAngle);
+	float getShootTimer();
+	void setShootTimer(float time);
 
 private:
 	float health;
