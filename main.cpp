@@ -93,10 +93,20 @@ int main()
 		}
 		bEngine.shrink_to_fit();
 
-		for(eit=enemies.begin(); eit != enemies.end(); eit++)
+		for(eit=enemies.begin(); eit != enemies.end(); )
 		{
 			(*eit)->update(dt,0);
+			if(!(*eit)->isDead())
+				eit++;
+			else
+			{
+				(*eit)->~Enemy();
+				eit = enemies.erase(eit);
+			}
+
 		}
+		enemies.shrink_to_fit();
+
 		player.update(dt);
 		
 		//cout << dt*0.1 << endl;
