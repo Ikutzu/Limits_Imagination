@@ -1,10 +1,13 @@
 #include "Player.h"
 #include "Globals.h"
 
+Player::Player()
+{}
+/*
 Player::Player(Vector2f position, float speed, Texture *tex, IntRect sprite) : GameObject(position, speed, tex, sprite)
 {
 }
-
+*/
 Player::~Player(void)
 {
 }
@@ -33,4 +36,16 @@ void Player::update(float dt)
 		}
 
 		sprite.setPosition(position);
+}
+
+void Player::initialize(Vector2f position, float speed, Texture* tex, IntRect sprite)
+{
+	this->position = position;
+	this->speed = speed;
+
+	this->tex = tex;
+	this->sprite.setTexture(*tex);
+	this->sprite.setTextureRect(sprite);
+	borders = this->sprite.getGlobalBounds();
+	dead=false;
 }

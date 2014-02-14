@@ -30,7 +30,6 @@ void Enemy::update(float dt, float newAngle)
 	if(shootTimer <= 0)
 	{
 		Bullet *bullet = new Bullet(position, 40, angle, tex, IntRect(64,0,16,16));
-		
 	}
 }
 

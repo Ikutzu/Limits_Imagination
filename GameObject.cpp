@@ -1,5 +1,8 @@
 #include "GameObject.h"
 
+GameObject::GameObject()
+{}
+
 GameObject::GameObject(Vector2f position, float speed, Texture* tex, IntRect sprite)
 {
 	this->position = position;
@@ -33,4 +36,9 @@ bool GameObject::isDead()
 void const GameObject::draw(sf::RenderWindow* window)
 {
 	window->draw(sprite);
+}
+
+FloatRect GameObject::getBorders()
+{
+	return borders;
 }

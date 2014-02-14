@@ -83,6 +83,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="BulletEngine.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -92,6 +93,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="BulletEngine.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Player.h" />
