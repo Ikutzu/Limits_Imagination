@@ -20,6 +20,7 @@ public:
 
 	void update(float dt);
 	void draw(RenderWindow* window);
+	
 
 private:
 
@@ -34,8 +35,9 @@ private:
 	vector<Enemy*> enemies;
 	vector<Enemy*>::iterator eit;
 	
+	BulletEngine bulletEngine;
+	
 	vector<BulletEngine*> bEngine;
 	vector<BulletEngine*>::iterator bIt;
-	
 };
 

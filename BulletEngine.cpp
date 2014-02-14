@@ -1,9 +1,13 @@
 #include "BulletEngine.h"
 
 
+BulletEngine::BulletEngine()
+{}
+
 BulletEngine::BulletEngine(Texture *tex, int ammount)
 {
 	isEmpty = false;
+	
 	angle = 0;
 	for(int i = 0; i < ammount; i++)
 	{
@@ -23,6 +27,20 @@ BulletEngine::~BulletEngine(void)
 {
 }
 
+void BulletEngine::shoot(Texture *tex, int ammount)
+{
+	angle = 0;
+	for(int i = 0; i < ammount; i++)
+	{
+		angle += 360/ammount;
+		angles.push_back(angle);
+	}
+	for(ait = angles.begin(); ait != angles.end(); ait++)
+	{
+		Bullet *bullet = new Bullet(Vector2f(300,300), 50, *ait, tex, sf::IntRect(64,0,16,16));
+		bulletL.push_back(bullet);
+	}
+}
 
 void BulletEngine::update(float dt)
 {
@@ -40,11 +58,10 @@ void BulletEngine::update(float dt)
 			bit = bulletL.erase(bit);
 		}
 	}
-	bulletL.shrink_to_fit();
-	if (bulletL.begin() == bulletL.end())
-	{
+	if(bulletL.begin() == bulletL.end())
 		isEmpty = true;
-	}
+
+	bulletL.shrink_to_fit();
 }
 
 void BulletEngine::draw(RenderWindow* window)

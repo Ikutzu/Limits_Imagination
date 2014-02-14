@@ -5,6 +5,7 @@ int main()
 {
     RenderWindow window(VideoMode(900, 720), "Limitus: Imaginatus");
 	RenderWindow* win = &window;
+	window.setFramerateLimit(60);
 	
 	Sprite _background;
 	Texture background;
@@ -15,8 +16,6 @@ int main()
 	
 	Clock clock;
 	
-
-
 	while (window.isOpen())
     {
 		Event event;

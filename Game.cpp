@@ -8,7 +8,6 @@ Game::Game(void)
 	shoot = 0;
 	shape.setFillColor(Color::Color(100,40,40,255));
 	shape.setPosition(600,0);
-	
 	tex = &texture;
 	texture.loadFromFile("alus.png");
 	player.initialize(Vector2f(268,600), 40, tex, IntRect(0,0,64,64));
@@ -32,7 +31,7 @@ void Game::update(float dt)
 	if(Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		if(shoot <= 0)
-		{
+		{	
 			BulletEngine *engine1 = new BulletEngine(tex, 20);
 			bEngine.push_back(engine1);
 			shoot=1;
