@@ -1,6 +1,8 @@
 #pragma once
 #include "gameobject.h"
 
+#include <cmath>
+
 using namespace sf;
 
 class Bullet :

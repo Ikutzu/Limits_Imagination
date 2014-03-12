@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "Globals.h"
 
 GameObject::GameObject()
 {}

@@ -1,6 +1,8 @@
 #pragma once
 #include "gameobject.h"
 
+#include "Bullet.h"
+
 class Enemy :
 	public GameObject
 {

@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Globals.h"
 
 RectangleShape shape(Vector2f(300, 720));
 	
@@ -10,7 +11,7 @@ Game::Game(void)
 	shape.setPosition(600,0);
 	tex = &texture;
 	texture.loadFromFile("alus.png");
-	player.initialize(Vector2f(268,600), 30, tex, IntRect(0,0,64,64));
+	player.initialize(Vector2f(268,600), 25, tex, IntRect(0,0,64,64));
 }
 
 
@@ -21,7 +22,6 @@ Game::~Game(void)
 
 void Game::update(float dt)
 {
-	
 	updateBullet(dt);
 	updateEnemy(dt);
 	player.update(dt);
@@ -29,11 +29,9 @@ void Game::update(float dt)
 
 void Game::draw(RenderWindow* window)
 {		
-	player.draw(window);
-
-	for(bIt = bEngine.begin(); bIt != bEngine.end(); bIt++)
+	for(bit = bEngine.begin(); bit != bEngine.end(); bit++)
 	{
-		(*bIt)->draw(window);
+		(*bit)->draw(window);
 	}
 
 	for(eit=enemies.begin(); eit != enemies.end(); eit++)
@@ -41,6 +39,7 @@ void Game::draw(RenderWindow* window)
 		(*eit)->draw(window);
 	}
 
+	player.draw(window);
 	window->draw(shape);
 	window->display();
 }
@@ -80,6 +79,7 @@ void Game::updateEnemy(float dt)
 	}
 	
 	enemies.shrink_to_fit();
+
 }
 
 void Game::updateBullet(float dt)
@@ -88,25 +88,25 @@ void Game::updateBullet(float dt)
 	{
 		if(shoot <= 0)
 		{	
-			BulletEngine *engine1 = new BulletEngine(player.getPosition(), tex, 20);
+			BulletEngine *engine1 = new BulletEngine(player.getPosition(),270, tex, 1);
 			bEngine.push_back(engine1);
-			shoot=1;
+			shoot=0.5;
 		}
 	}
 
 	shoot-=dt;
 
-	for(bIt = bEngine.begin(); bIt != bEngine.end();)
+	for(bit = bEngine.begin(); bit != bEngine.end();)
 	{
-		(*bIt)->update(dt);
-		if (!(*bIt)->isEmpty)
+		(*bit)->update(dt);
+		if (!(*bit)->isEmpty)
 		{
-			bIt++;
+			bit++;
 		}
 		else
 		{
-			(*bIt)->~BulletEngine();
-			bIt = bEngine.erase(bIt);
+			(*bit)->~BulletEngine();
+			bit = bEngine.erase(bit);
 		}
 	}
 	

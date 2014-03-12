@@ -34,7 +34,6 @@ void Player::update(float dt)
 			position.y += 1*speed*dt;
 			cout << "S is down" << endl;
 		}
-
 		sprite.setPosition(position);
 }
 
@@ -46,6 +45,7 @@ void Player::initialize(Vector2f position, float speed, Texture* tex, IntRect sp
 	this->tex = tex;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
-	borders = this->sprite.getGlobalBounds();
+	borders = this->sprite.getLocalBounds();
+	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
 	dead=false;
 }

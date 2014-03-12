@@ -3,7 +3,6 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "BulletEngine.h"
-#include "Globals.h"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -38,7 +37,7 @@ private:
 	BulletEngine bulletEngine;
 	
 	vector<BulletEngine*> bEngine;
-	vector<BulletEngine*>::iterator bIt;
+	vector<BulletEngine*>::iterator bit;
 
 	void updateEnemy(float dt);
 	void updateBullet(float dt);

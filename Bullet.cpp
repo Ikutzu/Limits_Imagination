@@ -1,6 +1,5 @@
 #include "Bullet.h"
 #include "Globals.h"
-#include <cmath>
 
 Bullet::Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite) : GameObject(position, speed, tex, sprite)
 {

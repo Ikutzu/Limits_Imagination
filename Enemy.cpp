@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include "Bullet.h"
 #include "Globals.h"
 
 
@@ -39,12 +38,12 @@ float Enemy::changeAngle(float newAngle)
 	if(angle <= 0)
 	{
 		angle = 360+angle;
-	}
+	}/*
 	if(position.x > 300)
 		angle -= degree*newAngle;
 	if(position.x < 300)
 		angle += degree*newAngle;
-
+		*/
 		return angle;
 }
 

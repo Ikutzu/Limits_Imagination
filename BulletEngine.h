@@ -12,6 +12,7 @@ class BulletEngine
 public:
 	BulletEngine();
 	BulletEngine(Vector2f pos, Texture *tex, int ammount);
+	BulletEngine(Vector2f pos, float angle, Texture *tex, int ammount);
 	~BulletEngine(void);
 
 	void update(float dt);
