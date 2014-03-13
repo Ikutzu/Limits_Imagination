@@ -45,7 +45,7 @@ BulletEngine::~BulletEngine(void)
 {
 }
 
-void BulletEngine::shoot(Texture *tex, int ammount)
+void BulletEngine::shoot(Vector2f pos, Texture *tex, int ammount)
 {
 	angle = 0;
 	for(int i = 0; i < ammount; i++)
@@ -55,9 +55,16 @@ void BulletEngine::shoot(Texture *tex, int ammount)
 	}
 	for(ait = angles.begin(); ait != angles.end(); ait++)
 	{
-		Bullet *bullet = new Bullet(Vector2f(300,300), 50, *ait, tex, sf::IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(pos, 50, *ait, tex, sf::IntRect(64,0,16,16));
 		bulletL.push_back(bullet);
 	}
+	angles.clear();
+}
+
+void BulletEngine::shoot(Vector2f pos, float angle, Texture *tex, int ammount)
+{
+		Bullet *bullet = new Bullet(pos, 50, angle, tex, sf::IntRect(64,0,16,16));
+		bulletL.push_back(bullet);
 }
 
 void BulletEngine::update(float dt)
@@ -77,9 +84,7 @@ void BulletEngine::update(float dt)
 	}
 
 	bulletL.shrink_to_fit();
-	
-	if(bulletL.begin() == bulletL.end())
-		isEmpty = true;
+	cout << bulletL.size() << endl;
 }
 
 void BulletEngine::draw(RenderWindow* window)

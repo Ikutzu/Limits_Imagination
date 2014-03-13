@@ -1,6 +1,8 @@
 #pragma once
 #include "Bullet.h"
 
+#include <iostream>
+
 #include <vector>
 #include <SFML\System.hpp>
 
@@ -17,7 +19,8 @@ public:
 
 	void update(float dt);
 	void draw(RenderWindow* window);
-	void shoot(Texture *tex, int ammount);
+	void shoot(Vector2f pos, Texture *tex, int ammount);
+	void shoot(Vector2f pos, float angle, Texture *tex, int ammount);
 	bool isEmpty;
 
 private:

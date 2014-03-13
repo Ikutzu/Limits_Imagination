@@ -1,7 +1,7 @@
 #include "Game.h"
 
 
-int main()
+void main()
 {
     RenderWindow window(VideoMode(900, 720), "Limitus: Imaginatus");
 	RenderWindow* win = &window;
@@ -11,9 +11,8 @@ int main()
 	Texture background;
 	background.loadFromFile("background.png");
 	_background.setTexture(background);
-
-	Game game;
 	
+	Game game;
 	Clock clock;
 	
 	while (window.isOpen())
@@ -37,7 +36,7 @@ int main()
 		game.draw(win);
 		
 		cout << dt*0.1 << endl;
+		 
+		//system("cls");
 	}
-
-    return 0;
 }

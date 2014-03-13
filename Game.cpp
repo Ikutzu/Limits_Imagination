@@ -29,10 +29,7 @@ void Game::update(float dt)
 
 void Game::draw(RenderWindow* window)
 {		
-	for(bit = bEngine.begin(); bit != bEngine.end(); bit++)
-	{
-		(*bit)->draw(window);
-	}
+	bulletEngine.draw(window);
 
 	for(eit=enemies.begin(); eit != enemies.end(); eit++)
 	{
@@ -64,8 +61,7 @@ void Game::updateEnemy(float dt)
 		
 		if((*eit)->getShootTimer() <= 0)
 		{
-			BulletEngine *engine1 = new BulletEngine((*eit)->getPosition(), tex, 20);
-			bEngine.push_back(engine1);
+			bulletEngine.shoot((*eit)->getPosition(), tex, 8);
 			(*eit)->setShootTimer(5);
 		}
 		
@@ -88,27 +84,10 @@ void Game::updateBullet(float dt)
 	{
 		if(shoot <= 0)
 		{	
-			BulletEngine *engine1 = new BulletEngine(player.getPosition(),270, tex, 1);
-			bEngine.push_back(engine1);
+			bulletEngine.shoot(player.getPosition(), 270, tex, 1);
 			shoot=0.5;
 		}
 	}
-
+	bulletEngine.update(dt);
 	shoot-=dt;
-
-	for(bit = bEngine.begin(); bit != bEngine.end();)
-	{
-		(*bit)->update(dt);
-		if (!(*bit)->isEmpty)
-		{
-			bit++;
-		}
-		else
-		{
-			(*bit)->~BulletEngine();
-			bit = bEngine.erase(bit);
-		}
-	}
-	
-	bEngine.shrink_to_fit();
 }
