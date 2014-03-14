@@ -6,7 +6,7 @@ Enemy::Enemy(Vector2f position, float speed, Texture *tex, IntRect sprite) : Gam
 {
 	this->speed = speed;
 	angle = 90;
-	shootTimer=0;
+	shootTimer=3;
 }
 
 
@@ -40,12 +40,12 @@ float Enemy::changeAngle(float newAngle)
 	{
 		angle = 360+angle;
 	}
-	
+	/*
 	if(position.x < 300)
 		angle -= degree*newAngle;
 	if(position.x > 300)
 		angle += degree*newAngle;
-		
+		*/
 		return angle;
 }
 

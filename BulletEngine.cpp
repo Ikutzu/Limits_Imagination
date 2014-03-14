@@ -9,9 +9,9 @@ BulletEngine::~BulletEngine(void)
 {
 }
 
-void BulletEngine::shoot(Vector2f pos, float speed, float eangle, Texture *tex, int ammount)
+void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex, int ammount)
 {
-	angle = eangle;
+	angle = eAngle;
 	for(int i = 0; i < ammount; i++)
 	{
 		angle += (360/ammount);
@@ -19,7 +19,7 @@ void BulletEngine::shoot(Vector2f pos, float speed, float eangle, Texture *tex, 
 	}
 	for(ait = angles.begin(); ait != angles.end(); ait++)
 	{
-		angle = eangle - *ait;
+		angle = *ait - eAngle;
 		if(angle > 360)
 		{
 			angle = angle-360;
@@ -29,10 +29,14 @@ void BulletEngine::shoot(Vector2f pos, float speed, float eangle, Texture *tex, 
 			angle = 360+angle;
 		}
 
-		float enemyspeed = 30;
-		if(angle != 90.00000 && angle != 270.00000)
-			enemyspeed += (enemyspeed-speed)*cos(angle*degree);
-		Bullet *bullet = new Bullet(pos, enemyspeed, *ait, tex, sf::IntRect(64,0,16,16));
+		float bulletspeed = 30;
+		float enemyspeed  = 0;
+		
+		enemyspeed = (eSpeed)*cos(angle*degree);
+		
+		//angle = eAngle+(cos((bulletspeed*bulletspeed-eSpeed*eSpeed-enemyspeed*enemyspeed)/((-2)*eSpeed*enemyspeed))/degree);
+		
+		Bullet *bullet = new Bullet(Vector2f(300,360), bulletspeed+enemyspeed, *ait, tex, sf::IntRect(64,0,16,16));
 		bullet->setHostile();
 		bulletL.push_back(bullet);
 	}
@@ -49,7 +53,7 @@ void BulletEngine::update(float dt)
 {
 	for(bit = bulletL.begin(); bit != bulletL.end();)
 	{
-		(*bit)->update(dt, 10);
+		(*bit)->update(dt);
 		
 		if (!(*bit)->isDead())
 			bit++;
