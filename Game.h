@@ -19,7 +19,6 @@ public:
 
 	void update(float dt);
 	void draw(RenderWindow* window);
-	
 
 private:
 
@@ -36,10 +35,10 @@ private:
 	
 	BulletEngine bulletEngine;
 	
-	vector<BulletEngine*> bEngine;
-	vector<BulletEngine*>::iterator bit;
+	vector<Bullet*>::iterator bit;
 
 	void updateEnemy(float dt);
 	void updateBullet(float dt);
+	void collision();
 };
 

@@ -2,10 +2,10 @@
 #include "Globals.h"
 
 
-Enemy::Enemy(Vector2f position, float speed, Texture *tex, IntRect sprite) : GameObject(position, speed, tex, sprite)
+Enemy::Enemy(Vector2f position, float speed, Texture *tex, IntRect sprite) : GameObject(position, tex, sprite)
 {
+	this->speed = speed;
 	angle = 90;
-	this->sprite.setRotation(angle+90);
 	shootTimer=0;
 }
 
@@ -20,8 +20,9 @@ void Enemy::update(float dt, float newAngle)
 	position.x += speed*dt*cos(changeAngle(newAngle*dt)*degree);
 	position.y += speed*dt*sin(changeAngle(newAngle*dt)*degree);
 
+	sprite.setRotation(angle+90);
 	sprite.setPosition(position);
-	
+
 	if (position.x < GAME_WINDOW.left-64 || position.x > GAME_WINDOW.width+64 ||
 		position.y < GAME_WINDOW.top-64  || position.y > GAME_WINDOW.height+64)
 		dead = true;
@@ -38,12 +39,13 @@ float Enemy::changeAngle(float newAngle)
 	if(angle <= 0)
 	{
 		angle = 360+angle;
-	}/*
-	if(position.x > 300)
-		angle -= degree*newAngle;
+	}
+	
 	if(position.x < 300)
+		angle -= degree*newAngle;
+	if(position.x > 300)
 		angle += degree*newAngle;
-		*/
+		
 		return angle;
 }
 

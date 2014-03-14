@@ -1,8 +1,6 @@
 #pragma once
 #include "gameobject.h"
 
-#include "Bullet.h"
-
 class Enemy :
 	public GameObject
 {
@@ -17,7 +15,6 @@ public:
 
 private:
 	float health;
-	float angle;
 	float shootTimer;
 };
 

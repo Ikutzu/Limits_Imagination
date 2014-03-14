@@ -9,14 +9,17 @@ class Bullet :
 	public GameObject
 {
 public:
+	
 	Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite);
 	~Bullet(void);
 
 	void update(float dt, float newAngle);
 	float changeAngle(float newAngle);
 	
+	void setHostile();
+	bool getHostile();
 
 private:
-	float angle;
+	bool hostile;
 };
 

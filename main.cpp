@@ -5,7 +5,7 @@ void main()
 {
     RenderWindow window(VideoMode(900, 720), "Limitus: Imaginatus");
 	RenderWindow* win = &window;
-	//window.setFramerateLimit(60);
+	window.setFramerateLimit(60);
 	
 	Sprite _background;
 	Texture background;

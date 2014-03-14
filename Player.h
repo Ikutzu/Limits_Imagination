@@ -19,8 +19,9 @@ public:
 
 	void update(float dt);
 	void initialize(Vector2f position, float speed, Texture* tex, IntRect sprite);
-
-private:
 	
+	FloatRect hitbox;
+private:
+	float scale;
 };
 

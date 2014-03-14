@@ -5,65 +5,43 @@
 BulletEngine::BulletEngine()
 {}
 
-BulletEngine::BulletEngine(Vector2f pos, Texture *tex, int ammount)
-{
-	isEmpty = false;
-	
-	angle = 0;
-	for(int i = 0; i < ammount; i++)
-	{
-		angle += 360/ammount;
-		angles.push_back(angle);
-	}
-	for(ait = angles.begin(); ait != angles.end(); ait++)
-	{
-		Bullet *bullet = new Bullet(pos, 30, *ait, tex, sf::IntRect(64,0,16,16));
-		bulletL.push_back(bullet);
-	}
-	
-}
-BulletEngine::BulletEngine(Vector2f pos, float angle, Texture *tex, int ammount)
-{
-	isEmpty = false;
-	
-	this->angle = angle;
-	for(int i = 0; i < ammount; i++)
-	{
-		angle += 360/ammount;
-		angles.push_back(angle);
-	}
-	for(ait = angles.begin(); ait != angles.end(); ait++)
-	{
-		Bullet *bullet = new Bullet(pos, 30, *ait, tex, sf::IntRect(64,0,16,16));
-		bulletL.push_back(bullet);
-	}
-	
-}
-
-
 BulletEngine::~BulletEngine(void)
 {
 }
 
-void BulletEngine::shoot(Vector2f pos, Texture *tex, int ammount)
+void BulletEngine::shoot(Vector2f pos, float speed, float eangle, Texture *tex, int ammount)
 {
-	angle = 0;
+	angle = eangle;
 	for(int i = 0; i < ammount; i++)
 	{
-		angle += 360/ammount;
+		angle += (360/ammount);
 		angles.push_back(angle);
 	}
 	for(ait = angles.begin(); ait != angles.end(); ait++)
 	{
-		Bullet *bullet = new Bullet(pos, 50, *ait, tex, sf::IntRect(64,0,16,16));
+		angle = eangle - *ait;
+		if(angle > 360)
+		{
+			angle = angle-360;
+		}
+		if(angle <= 0)
+		{
+			angle = 360+angle;
+		}
+
+		float enemyspeed = 30;
+		if(angle != 90.00000 && angle != 270.00000)
+			enemyspeed += (enemyspeed-speed)*cos(angle*degree);
+		Bullet *bullet = new Bullet(pos, enemyspeed, *ait, tex, sf::IntRect(64,0,16,16));
+		bullet->setHostile();
 		bulletL.push_back(bullet);
 	}
 	angles.clear();
 }
 
-void BulletEngine::shoot(Vector2f pos, float angle, Texture *tex, int ammount)
+void BulletEngine::shoot(Vector2f pos, float speed, float angle, Texture *tex)
 {
-		Bullet *bullet = new Bullet(pos, 50, angle, tex, sf::IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(pos, speed, angle, tex, sf::IntRect(64,0,16,16));
 		bulletL.push_back(bullet);
 }
 
@@ -84,7 +62,6 @@ void BulletEngine::update(float dt)
 	}
 
 	bulletL.shrink_to_fit();
-	cout << bulletL.size() << endl;
 }
 
 void BulletEngine::draw(RenderWindow* window)

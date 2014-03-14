@@ -4,16 +4,15 @@
 GameObject::GameObject()
 {}
 
-GameObject::GameObject(Vector2f position, float speed, Texture* tex, IntRect sprite)
+GameObject::GameObject(Vector2f position, Texture* tex, IntRect sprite)
 {
 	this->position = position;
-	this->speed = speed;
-
+	speed = 0;
+	angle = 0;
 	this->tex = tex;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
 	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
-	borders = this->sprite.getGlobalBounds();
 	dead=false;
 }
 
@@ -42,5 +41,20 @@ void const GameObject::draw(sf::RenderWindow* window)
 
 FloatRect GameObject::getBorders()
 {
-	return borders;
+	return sprite.getGlobalBounds();
+}
+
+void GameObject::kill()
+{
+	dead = true;
+}
+
+float GameObject::getAngle()
+{
+	return angle;
+}
+
+float GameObject::getSpeed()
+{
+	return speed;
 }

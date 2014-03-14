@@ -1,8 +1,10 @@
 #include "Bullet.h"
 #include "Globals.h"
 
-Bullet::Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite) : GameObject(position, speed, tex, sprite)
+Bullet::Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite) : GameObject(position, tex, sprite)
 {
+	this->speed = speed;
+	hostile = false;
 	angle = direction;
 }
 
@@ -14,7 +16,7 @@ Bullet::~Bullet()
 
 
 void Bullet::update(float dt, float newAngle)
-{	
+{
 	position.x += speed*dt*cos(changeAngle(newAngle)*degree);
 	position.y += speed*dt*sin(changeAngle(newAngle)*degree);
 	
@@ -37,4 +39,14 @@ float Bullet::changeAngle(float newAngle)
 	}
 	
 		return angle;
+}
+
+
+void Bullet::setHostile()
+{
+	hostile = true;
+}
+bool Bullet::getHostile()
+{
+	return hostile;
 }
