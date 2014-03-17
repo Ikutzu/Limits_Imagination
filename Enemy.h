@@ -9,7 +9,7 @@ public:
 	~Enemy(void);
 
 	void update(float dt, float newAngle);
-	float changeAngle(float newAngle);
+	void changeAngle(float newAngle);
 	float getShootTimer();
 	void setShootTimer(float time);
 

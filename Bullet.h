@@ -20,5 +20,6 @@ public:
 
 private:
 	bool hostile;
+	float angle;
 };
 

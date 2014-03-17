@@ -5,7 +5,7 @@
 Enemy::Enemy(Vector2f position, float speed, Texture *tex, IntRect sprite) : GameObject(position, tex, sprite)
 {
 	this->speed = speed;
-	angle = 90;
+	this->sprite.setRotation(90);
 	shootTimer=3;
 }
 
@@ -17,10 +17,10 @@ Enemy::~Enemy(void)
 
 void Enemy::update(float dt, float newAngle)
 {
-	position.x += speed*dt*cos(changeAngle(newAngle*dt)*degree);
-	position.y += speed*dt*sin(changeAngle(newAngle*dt)*degree);
+	changeAngle(newAngle*dt*0.05);
+	position.x += speed*dt*cos(getRotation()*degree);
+	position.y += speed*dt*sin(getRotation()*degree);
 
-	sprite.setRotation(angle+90);
 	sprite.setPosition(position);
 
 	if (position.x < GAME_WINDOW.left-64 || position.x > GAME_WINDOW.width+64 ||
@@ -30,23 +30,14 @@ void Enemy::update(float dt, float newAngle)
 	shootTimer -= dt;
 }
 
-float Enemy::changeAngle(float newAngle)
+void Enemy::changeAngle(float newAngle)
 {
-	if(angle > 360)
-	{
-		angle = angle-360;
-	}
-	if(angle <= 0)
-	{
-		angle = 360+angle;
-	}
-	/*
+/*	
 	if(position.x < 300)
-		angle -= degree*newAngle;
+		sprite.setRotation(sprite.getRotation() -newAngle);
 	if(position.x > 300)
-		angle += degree*newAngle;
-		*/
-		return angle;
+		sprite.setRotation(sprite.getRotation()+ newAngle);
+*/		
 }
 
 float Enemy::getShootTimer()

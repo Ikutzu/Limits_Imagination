@@ -53,6 +53,7 @@ void Player::initialize(Vector2f position, float speed, Texture* tex, IntRect sp
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
 	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
+	this->sprite.setRotation(-90);
 	dead=false;
 	
 	scale = 25; // prosenttia spriten koosta

@@ -79,7 +79,7 @@ void Game::updateEnemy(float dt)
 		
 		if((*eit)->getShootTimer() <= 0)
 		{
-			bulletEngine.shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getAngle(), tex, 20);
+			bulletEngine.shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 20);
 			(*eit)->setShootTimer(5);
 		}
 
@@ -102,7 +102,7 @@ void Game::updateBullet(float dt)
 	{
 		if(shoot <= 0)
 		{	
-			bulletEngine.shoot(player.getPosition(), 0, 270, tex);
+			bulletEngine.shoot(player.getPosition(), 30, player.getRotation(), tex);
 			shoot=0.5;
 		}
 	}

@@ -15,11 +15,7 @@ void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex,
 	for(int i = 0; i < ammount; i++)
 	{
 		angle += (360/ammount);
-		angles.push_back(angle);
-	}
-	for(ait = angles.begin(); ait != angles.end(); ait++)
-	{
-		angle = *ait - eAngle;
+		
 		if(angle > 360)
 		{
 			angle = angle-360;
@@ -29,14 +25,45 @@ void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex,
 			angle = 360+angle;
 		}
 
+		angles.push_back(angle);
+	}
+	for(ait = angles.begin(); ait != angles.end(); ait++)
+	{
+		if(*ait <= eAngle)
+			angle = eAngle - *ait;
+		else
+			angle = *ait - eAngle;
+				
+		if(angle > 180)
+				angle = (360-angle)+eAngle;
+		
+		angle = 180-angle;
+
 		float bulletspeed = 30;
-		float enemyspeed  = 0;
+
+		bulletspeed = sqrt((bulletspeed*bulletspeed)+(eSpeed*eSpeed)-(2*bulletspeed*eSpeed*cos(angle)));
+
+		angle = sinh((eSpeed*sin(angle))/bulletspeed);
 		
-		enemyspeed = (eSpeed)*cos(angle*degree);
+		angle = sqrt(angle*angle);
 		
+		if(*ait <= eAngle)
+		{
+			if(*ait-eAngle <= 180)
+				angle = *ait - angle;
+			else
+				angle = *ait + angle;
+		}
+		else
+		{
+			if(eAngle-*ait <= 180)
+				angle = *ait - angle;
+			else
+				angle = *ait + angle;
+		}
 		//angle = eAngle+(cos((bulletspeed*bulletspeed-eSpeed*eSpeed-enemyspeed*enemyspeed)/((-2)*eSpeed*enemyspeed))/degree);
 		
-		Bullet *bullet = new Bullet(Vector2f(300,360), bulletspeed+enemyspeed, *ait, tex, sf::IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(Vector2f(300,360), bulletspeed, angle, tex, sf::IntRect(64,0,16,16));
 		bullet->setHostile();
 		bulletL.push_back(bullet);
 	}

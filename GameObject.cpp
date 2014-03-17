@@ -8,7 +8,6 @@ GameObject::GameObject(Vector2f position, Texture* tex, IntRect sprite)
 {
 	this->position = position;
 	speed = 0;
-	angle = 0;
 	this->tex = tex;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
@@ -49,9 +48,9 @@ void GameObject::kill()
 	dead = true;
 }
 
-float GameObject::getAngle()
+float GameObject::getRotation()
 {
-	return angle;
+	return sprite.getRotation();
 }
 
 float GameObject::getSpeed()

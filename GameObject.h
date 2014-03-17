@@ -18,11 +18,10 @@ public:
 	FloatRect getBorders();
 	void kill();
 	bool isDead();
-	float getAngle();
 	float getSpeed();
+	float getRotation();
 
 protected:
-	float angle;
 	Texture* tex;
 	Vector2f position;
 	float speed;

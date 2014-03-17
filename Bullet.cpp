@@ -3,18 +3,10 @@
 
 Bullet::Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite) : GameObject(position, tex, sprite)
 {
-	
 	this->speed = speed;
 	hostile = false;
+	this->sprite.setRotation(direction);
 	angle = direction;
-	if(angle > 360)
-	{
-		angle = angle-360;
-	}
-	if(angle <= 0)
-	{
-		angle = 360+angle;
-	}
 }
 
 
@@ -26,8 +18,8 @@ Bullet::~Bullet()
 
 void Bullet::update(float dt)
 {
-	position.x += speed*dt*cos(angle*degree);
-	position.y += speed*dt*sin(angle*degree);
+	position.x += speed*dt*cos(sprite.getRotation()*degree);
+	position.y += speed*dt*sin(sprite.getRotation()*degree);
 	
 	sprite.setPosition(position);
 
