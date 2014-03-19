@@ -65,8 +65,8 @@ void Game::updateEnemy(float dt)
 	{
 		Enemy *enemy = new Enemy(Vector2f(100,0), 25, tex, IntRect(0,0,64,64));
 		enemies.push_back(enemy);
-		//Enemy *enemy2 = new Enemy(Vector2f(500,0), 25, tex, IntRect(0,0,64,64));
-		//enemies.push_back(enemy2);
+		Enemy *enemy2 = new Enemy(Vector2f(500,0), 25, tex, IntRect(0,0,64,64));
+		enemies.push_back(enemy2);
 		enemySpawnTimer = 50;
 		cout << "Enemy Spawns!!" << endl;
 	}
