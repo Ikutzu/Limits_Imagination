@@ -56,7 +56,7 @@ void Player::initialize(Vector2f position, float speed, Texture* tex, IntRect sp
 	this->sprite.setRotation(-90);
 	dead=false;
 	
-	scale = 25; // prosenttia spriten koosta
+	scale = 15; // prosenttia spriten koosta
 	scale = 100-scale;
 	scale *= 0.005;
 }

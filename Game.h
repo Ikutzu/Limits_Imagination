@@ -1,4 +1,6 @@
 #pragma once
+#include "Scene.h"
+#include "SceneSystem.h"
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
@@ -11,7 +13,8 @@
 using namespace std;
 using namespace sf;
 
-class Game
+class Game:
+	public Scene
 {
 public:
 	Game(void);

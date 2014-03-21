@@ -13,7 +13,7 @@ Game::Game(void)
 	shape.setFillColor(Color::Color(100,40,40,255));
 	shape.setPosition(600,0);
 	tex = &texture;
-	texture.loadFromFile("alus.png");
+	texture.loadFromFile("game.png");
 	player.initialize(Vector2f(268,600), 25, tex, IntRect(0,0,64,64));
 
 	font.loadFromFile("arial.ttf");		//
@@ -33,12 +33,15 @@ Game::~Game(void)
 
 void Game::update(float dt)
 {
-		updateBullet(dt);
-		updateEnemy(dt);
+	updateBullet(dt);
+	updateEnemy(dt);
+	
 	if(!player.isDead())
 		player.update(dt);
-		collision();
 	
+	collision();
+
+	SceneSystem::pauseScene();
 }
 
 void Game::draw(RenderWindow* window)
@@ -63,9 +66,9 @@ void Game::updateEnemy(float dt)
 {
 	if(enemySpawnTimer <= 0)
 	{
-		Enemy *enemy = new Enemy(Vector2f(100,0), 25, tex, IntRect(0,0,64,64));
+		Enemy *enemy = new Enemy(Vector2f(100,0), 15, tex, IntRect(0,0,64,64));
 		enemies.push_back(enemy);
-		Enemy *enemy2 = new Enemy(Vector2f(500,0), 25, tex, IntRect(0,0,64,64));
+		Enemy *enemy2 = new Enemy(Vector2f(500,0), 15, tex, IntRect(0,0,64,64));
 		enemies.push_back(enemy2);
 		enemySpawnTimer = 50;
 		cout << "Enemy Spawns!!" << endl;
@@ -79,7 +82,7 @@ void Game::updateEnemy(float dt)
 		
 		if((*eit)->getShootTimer() <= 0)
 		{
-			bulletEngine.shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 20);
+			bulletEngine.shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 10);
 			(*eit)->setShootTimer(5);
 		}
 
@@ -123,7 +126,7 @@ void Game::collision()
 			}
 		}
 		
-		if(player.hitbox.intersects((*bit)->getBorders()) && (*bit)->getHostile())
+		if(player.hitbox.intersects((*bit)->getBorders()) && (*bit)->getHostile() && !player.isDead())
 			player.kill();
 	}
 }

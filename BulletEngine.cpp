@@ -24,6 +24,7 @@ void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex,
 		{
 			angle = 360+angle;
 		}
+		
 
 		angles.push_back(angle);
 	}
@@ -36,7 +37,7 @@ void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex,
 		
 		angle = 180-angle;
 
-		float bulletspeed = 30;
+		float bulletspeed =  20;
 
 		bulletspeed = sqrt((bulletspeed*bulletspeed)+(eSpeed*eSpeed)-(2*bulletspeed*eSpeed*cos(angle*degree)));
 		angle = sinh((eSpeed*sin(angle*degree))/bulletspeed)/degree;
