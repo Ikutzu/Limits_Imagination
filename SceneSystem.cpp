@@ -11,12 +11,13 @@ void SceneSystem::openScene(Scene* newScene)
 	sceneChanged = true;
 }
 
-void SceneSystem::closeScene(Scene newScene)
+void SceneSystem::closeScene()
 {
 	it = SceneList.end() -1;
 	(*it)->~Scene();
 	SceneList.shrink_to_fit();
 	sceneChanged = true;
+	
 }
 
 void SceneSystem::pauseScene()

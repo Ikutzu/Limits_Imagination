@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Scene.h"
 
 #include <vector>
@@ -10,7 +11,7 @@ class SceneSystem
 public:
 	static Scene getScene(int SceneNum);
 	static void openScene(Scene *newScene);
-	static void closeScene(Scene scene);
+	static void closeScene();
 	static void pauseScene();
 	static void changeScene(Scene *scene);
 

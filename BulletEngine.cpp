@@ -1,13 +1,11 @@
 #include "BulletEngine.h"
 #include "Globals.h"
 
-
-BulletEngine::BulletEngine()
-{}
-
-BulletEngine::~BulletEngine(void)
-{
-}
+vector<Bullet*> BulletEngine::bulletL;
+vector<Bullet*>::iterator BulletEngine::bit;
+vector<float> BulletEngine::angles;
+vector<float>::iterator BulletEngine::ait;
+float BulletEngine::angle;
 
 void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex, int ammount)
 {

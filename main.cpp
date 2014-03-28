@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Mainmenu.h"
 
 
 void main()
@@ -7,13 +8,11 @@ void main()
 	RenderWindow* win = &window;
 //	window.setFramerateLimit(60);
 	
-	Sprite _background;
-	Texture background;
-	background.loadFromFile("background.png");
-	_background.setTexture(background);
+
 	
-	Game *game = new Game;
-	SceneSystem::openScene(game);
+	//Game *game = new Game;
+	Mainmenu *menu = new Mainmenu;
+	SceneSystem::openScene(menu);
 	Clock clock;
 	
 	while (window.isOpen())
@@ -33,9 +32,8 @@ void main()
 		SceneSystem::update(dt);
 
         window.clear();
-		window.draw(_background);
 		SceneSystem::draw(win);
-		
+		window.display();
 		cout << elapsed.asSeconds() << endl;
 		 
 		//system("cls");

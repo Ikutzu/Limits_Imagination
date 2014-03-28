@@ -1,9 +1,11 @@
 #include "Mainmenu.h"
 
+RectangleShape bjuton(Vector2f(128, 512));
 
 Mainmenu::Mainmenu(void)
 {
-
+	bjuton.setFillColor(Color::Blue);
+	bjuton.setPosition(0,0);
 }
 
 
@@ -13,10 +15,15 @@ Mainmenu::~Mainmenu(void)
 
 void Mainmenu::update(float dt)
 {
-
+	if(Mouse::isButtonPressed(Mouse::Left))
+	{
+		Game* game = new Game;
+		SceneSystem::changeScene(game);
+	}
+	
 }
 
 void Mainmenu::draw(RenderWindow* window)
 {
-
+	window->draw(bjuton);
 }

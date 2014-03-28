@@ -8,6 +8,9 @@ Text text;		//
 
 Game::Game(void)
 {
+	background.loadFromFile("background.png");
+	_background.setTexture(background);
+
 	enemySpawnTimer = 0;
 	shoot = 0;
 	shape.setFillColor(Color::Color(100,40,40,255));
@@ -31,7 +34,6 @@ Game::~Game(void)
 {
 }
 
-
 void Game::update(float dt)
 {
 	updateBullet(dt);
@@ -45,6 +47,7 @@ void Game::update(float dt)
 
 void Game::draw(RenderWindow* window)
 {		
+	window->draw(_background);
 	bulletEngine.draw(window);
 
 	for(eit=enemies.begin(); eit != enemies.end(); eit++)
@@ -58,7 +61,6 @@ void Game::draw(RenderWindow* window)
 	else						//
 		window->draw(text);		//
 
-	window->display();
 }
 
 void Game::updateEnemy(float dt)

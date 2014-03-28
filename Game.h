@@ -5,6 +5,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "BulletEngine.h"
+#include "Mainmenu.h"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -24,6 +25,9 @@ public:
 	void draw(RenderWindow* window);
 
 private:
+
+	Sprite _background;
+	Texture background;
 
 	Texture texture;
 	Texture* tex;
