@@ -23,6 +23,7 @@ Game::Game(void)
 	text.setStyle(Text::Regular);		//
 	text.setPosition(605, 0);			//
 	text.setString("Game over!");		//
+
 }
 
 
@@ -40,8 +41,6 @@ void Game::update(float dt)
 		player.update(dt);
 	
 	collision();
-
-	SceneSystem::pauseScene();
 }
 
 void Game::draw(RenderWindow* window)

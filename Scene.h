@@ -13,7 +13,8 @@ public:
 	virtual void update(float dt);
 	virtual void draw(RenderWindow* window);
 	
-	void activate();
+	void pause(bool pause);
+	bool activated();
 
 private:
 	bool sceneActive;

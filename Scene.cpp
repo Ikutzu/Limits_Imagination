@@ -18,10 +18,12 @@ void Scene::draw(RenderWindow* window)
 {
 }
 
-void Scene::activate()
+void Scene::pause(bool pause)
 {
-	if(sceneActive)
-		sceneActive = false;
-	else
-		sceneActive = true;
+	sceneActive = pause;
+}
+
+bool Scene::activated()
+{
+	return sceneActive;
 }

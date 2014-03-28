@@ -12,14 +12,14 @@ public:
 	GameObject(Vector2f position, Texture* tex, IntRect sprite);
 	~GameObject(void);
 
-	Vector2f getPosition();
 	void virtual update(float dt);
 	void const draw(RenderWindow* window);
-	FloatRect getBorders();
 	void kill();
 	bool isDead();
 	float getSpeed();
 	float getRotation();
+	Vector2f getPosition();
+	FloatRect getBorders();
 
 protected:
 	Texture* tex;

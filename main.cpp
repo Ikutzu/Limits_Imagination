@@ -12,7 +12,8 @@ void main()
 	background.loadFromFile("background.png");
 	_background.setTexture(background);
 	
-	Game game;
+	Game *game = new Game;
+	SceneSystem::openScene(game);
 	Clock clock;
 	
 	while (window.isOpen())
@@ -29,13 +30,13 @@ void main()
 		clock.restart();
 		
 		
-		game.update(dt);
+		SceneSystem::update(dt);
 
         window.clear();
 		window.draw(_background);
-		game.draw(win);
+		SceneSystem::draw(win);
 		
-		cout << dt*0.1 << endl;
+		cout << elapsed.asSeconds() << endl;
 		 
 		//system("cls");
 	}
