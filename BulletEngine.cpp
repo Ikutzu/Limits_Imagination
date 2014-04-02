@@ -7,6 +7,15 @@ vector<float> BulletEngine::angles;
 vector<float>::iterator BulletEngine::ait;
 float BulletEngine::angle;
 
+void BulletEngine::clear()
+{
+	for(bit = bulletL.begin(); bit != bulletL.end(); bit++)
+	{
+		(*bit)->~Bullet();
+	}
+	bulletL.clear();
+}
+
 void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex, int ammount)
 {
 	angle = eAngle;

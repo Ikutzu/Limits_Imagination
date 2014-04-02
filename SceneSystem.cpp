@@ -7,7 +7,7 @@ bool SceneSystem::sceneChanged = false;
 void SceneSystem::openScene(Scene* newScene)
 {
 	SceneList.push_back(newScene);
-	newScene->pause(true);
+	newScene->setActive(true);
 	sceneChanged = true;
 }
 
@@ -17,17 +17,19 @@ void SceneSystem::closeScene()
 	(*it)->~Scene();
 	SceneList.shrink_to_fit();
 	sceneChanged = true;
-	
+
 }
 
 void SceneSystem::pauseScene()
 {
 	it = SceneList.end() -1;
-	(*it)->pause(false);
+	(*it)->setActive(false);
 }
 
 void SceneSystem::changeScene(Scene* newScene)
 {
+	closeScene();
+	it = SceneList.begin();
 	SceneList.clear();
 	openScene(newScene);
 }

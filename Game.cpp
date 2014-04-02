@@ -32,15 +32,16 @@ Game::Game(void)
 
 Game::~Game(void)
 {
+	BulletEngine::clear();
 }
 
 void Game::update(float dt)
 {
 	updateBullet(dt);
 	updateEnemy(dt);
-	
-	if(!player.isDead())
-		player.update(dt);
+	player.update(dt);
+	if(player.isDead())
+		SceneSystem::changeScene(new Mainmenu);
 	
 	collision();
 }
@@ -48,7 +49,7 @@ void Game::update(float dt)
 void Game::draw(RenderWindow* window)
 {		
 	window->draw(_background);
-	bulletEngine.draw(window);
+	BulletEngine::draw(window);
 
 	for(eit=enemies.begin(); eit != enemies.end(); eit++)
 	{
@@ -83,7 +84,7 @@ void Game::updateEnemy(float dt)
 		
 		if((*eit)->getShootTimer() <= 0)
 		{
-			bulletEngine.shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 10);
+			BulletEngine::shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 10);
 			(*eit)->setShootTimer(5);
 		}
 
@@ -106,17 +107,17 @@ void Game::updateBullet(float dt)
 	{
 		if(shoot <= 0)
 		{	
-			bulletEngine.shoot(player.getPosition(), 30, player.getRotation(), tex);
+			BulletEngine::shoot(player.getPosition(), 30, player.getRotation(), tex);
 			shoot=0.5;
 		}
 	}
-	bulletEngine.update(dt);
+	BulletEngine::update(dt);
 	shoot-=dt;
 }
 
 void Game::collision()
 {
-	for(bit = bulletEngine.bulletL.begin(); bit != bulletEngine.bulletL.end(); bit++)
+	for(bit = BulletEngine::bulletL.begin(); bit != BulletEngine::bulletL.end(); bit++)
 	{
 		for(eit = enemies.begin(); eit != enemies.end(); eit++)
 		{

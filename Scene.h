@@ -8,12 +8,12 @@ class Scene
 {
 public:
 	Scene(void);
-	~Scene(void);
+	virtual ~Scene(void);
 	
 	virtual void update(float dt);
 	virtual void draw(RenderWindow* window);
 	
-	void pause(bool pause);
+	void setActive(bool pause);
 	bool activated();
 
 private:

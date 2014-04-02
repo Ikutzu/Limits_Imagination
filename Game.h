@@ -40,8 +40,6 @@ private:
 	vector<Enemy*> enemies;
 	vector<Enemy*>::iterator eit;
 	
-	BulletEngine bulletEngine;
-	
 	vector<Bullet*>::iterator bit;
 
 	void updateEnemy(float dt);

@@ -15,7 +15,8 @@ public:
 	static void draw(RenderWindow* window);
 	static void shoot(Vector2f pos, float speed, float angle, Texture *tex, int ammount);
 	static void shoot(Vector2f pos, float speed, float angle, Texture *tex);
-	
+	static void clear();
+
 	static vector<Bullet*> bulletL;
 
 private:

@@ -18,7 +18,7 @@ void Scene::draw(RenderWindow* window)
 {
 }
 
-void Scene::pause(bool pause)
+void Scene::setActive(bool pause)
 {
 	sceneActive = pause;
 }
