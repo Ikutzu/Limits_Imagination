@@ -9,10 +9,7 @@ void main()
 //	window.setFramerateLimit(60);
 	
 
-	
-	//Game *game = new Game;
-	Mainmenu *menu = new Mainmenu;
-	SceneSystem::openScene(menu);
+	SceneSystem::openScene(new Mainmenu);
 	Clock clock;
 	
 	while (window.isOpen())

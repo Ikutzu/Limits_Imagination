@@ -15,6 +15,7 @@ void SceneSystem::closeScene()
 {
 	it = SceneList.end() -1;
 	(*it)->~Scene();
+	SceneList.erase(it);
 	SceneList.shrink_to_fit();
 	sceneChanged = true;
 
@@ -56,5 +57,9 @@ void SceneSystem::draw(RenderWindow* window)
 	for(it = SceneList.begin(); it != SceneList.end(); it++)
 	{
 		(*it)->draw(window);
+	}
+	if(SceneList.begin() == SceneList.end())
+	{
+		window->close();
 	}
 }

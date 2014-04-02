@@ -68,11 +68,12 @@ void Game::updateEnemy(float dt)
 {
 	if(enemySpawnTimer <= 0)
 	{
-		Enemy *enemy = new Enemy(Vector2f(100,0), 15, tex, IntRect(0,0,64,64));
-		enemies.push_back(enemy);
-		Enemy *enemy2 = new Enemy(Vector2f(500,0), 15, tex, IntRect(0,0,64,64));
-		enemies.push_back(enemy2);
-		enemySpawnTimer = 50;
+		for(int i=0; i<3; i++)
+		{
+			Enemy *enemy = new Enemy(Vector2f(rand()%600,0), 15, tex, IntRect(0,0,64,64));
+			enemies.push_back(enemy);
+		}
+		enemySpawnTimer = 30;
 		cout << "Enemy Spawns!!" << endl;
 	}
 	
@@ -84,7 +85,7 @@ void Game::updateEnemy(float dt)
 		
 		if((*eit)->getShootTimer() <= 0)
 		{
-			BulletEngine::shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 10);
+			BulletEngine::shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 1);
 			(*eit)->setShootTimer(5);
 		}
 

@@ -15,6 +15,9 @@ Mainmenu::~Mainmenu(void)
 
 void Mainmenu::update(float dt)
 {
+	if(Keyboard::isKeyPressed(Keyboard::Escape))
+		SceneSystem::closeScene();
+
 	if(Mouse::isButtonPressed(Mouse::Left))
 	{
 		Game* game = new Game;
