@@ -25,7 +25,6 @@ void main()
 		float dt = 0.00001f*elapsed.asMicroseconds();
 		clock.restart();
 		
-		
 		SceneSystem::update(dt);
 
         window.clear();

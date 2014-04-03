@@ -10,9 +10,10 @@ Game::Game(void)
 {
 	background.loadFromFile("background.png");
 	_background.setTexture(background);
-
+	score = 0;
 	enemySpawnTimer = 0;
 	shoot = 0;
+	deadtimer = 0;
 	shape.setFillColor(Color::Color(100,40,40,255));
 	shape.setPosition(600,0);
 	tex = &texture;
@@ -41,8 +42,13 @@ void Game::update(float dt)
 	updateEnemy(dt);
 	player.update(dt);
 	if(player.isDead())
-		SceneSystem::changeScene(new Mainmenu);
-	
+	{
+		if(deadtimer > 15)
+		{
+			SceneSystem::changeScene(new Mainmenu);
+		}
+		deadtimer += dt;
+	}
 	collision();
 }
 
@@ -57,6 +63,7 @@ void Game::draw(RenderWindow* window)
 	}
 	
 	window->draw(shape);
+
 	if(!player.isDead())		//
 		player.draw(window);	
 	else						//
@@ -68,12 +75,12 @@ void Game::updateEnemy(float dt)
 {
 	if(enemySpawnTimer <= 0)
 	{
-		for(int i=0; i<3; i++)
-		{
+		//for(int i=0; i<3; i++)
+		//{
 			Enemy *enemy = new Enemy(Vector2f(rand()%600,0), 15, tex, IntRect(0,0,64,64));
 			enemies.push_back(enemy);
-		}
-		enemySpawnTimer = 30;
+		//}
+		enemySpawnTimer = 5;
 		cout << "Enemy Spawns!!" << endl;
 	}
 	
@@ -109,7 +116,7 @@ void Game::updateBullet(float dt)
 		if(shoot <= 0)
 		{	
 			BulletEngine::shoot(player.getPosition(), 30, player.getRotation(), tex);
-			shoot=0.5;
+			shoot=1.5;
 		}
 	}
 	BulletEngine::update(dt);
@@ -124,6 +131,7 @@ void Game::collision()
 		{
 			if((*eit)->getBorders().intersects((*bit)->getBorders()) && !(*bit)->getHostile())
 			{
+				score += 100;
 				(*eit)->kill();
 				(*bit)->kill();
 			}

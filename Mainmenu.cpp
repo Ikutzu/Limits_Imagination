@@ -8,7 +8,6 @@ Mainmenu::Mainmenu(void)
 	bjuton.setPosition(0,0);
 }
 
-
 Mainmenu::~Mainmenu(void)
 {
 }
@@ -18,7 +17,7 @@ void Mainmenu::update(float dt)
 	if(Keyboard::isKeyPressed(Keyboard::Escape))
 		SceneSystem::closeScene();
 
-	if(Mouse::isButtonPressed(Mouse::Left))
+	if(Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		Game* game = new Game;
 		SceneSystem::changeScene(game);

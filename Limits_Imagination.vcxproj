@@ -87,6 +87,7 @@
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mainmenu.cpp" />
+    <ClCompile Include="MenuParent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneSystem.cpp" />
@@ -99,6 +100,7 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Globals.h" />
     <ClInclude Include="Mainmenu.h" />
+    <ClInclude Include="MenuParent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneSystem.h" />

@@ -25,7 +25,7 @@ public:
 	void draw(RenderWindow* window);
 
 private:
-
+	
 	Sprite _background;
 	Texture background;
 
@@ -34,9 +34,12 @@ private:
 
 	float enemySpawnTimer;
 	float shoot;
-	
+	float deadtimer;
+
 	Player player;
 	
+	float score;
+
 	vector<Enemy*> enemies;
 	vector<Enemy*>::iterator eit;
 	
