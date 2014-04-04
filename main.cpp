@@ -30,7 +30,7 @@ void main()
         window.clear();
 		SceneSystem::draw(win);
 		window.display();
-		cout << elapsed.asSeconds() << endl;
+		//cout << elapsed.asSeconds() << endl;
 		 
 		//system("cls");
 	}

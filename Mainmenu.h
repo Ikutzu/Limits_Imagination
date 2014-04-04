@@ -1,8 +1,10 @@
 #pragma once
 #include "Game.h"
 #include "Scene.h"
+#include "MenuButton.h"
 
 #include <SFML\Graphics.hpp>
+#include <vector>
 
 using namespace sf;
 
@@ -15,5 +17,23 @@ public:
 		
 	void update(float dt);
 	void draw(RenderWindow* window);
+
+	void buttonPress();
+	void switchButton();
+
+private:
+	
+	Sprite _background;
+	Texture background;
+
+	Texture texture;
+	Texture* tex;
+
+	MenuButton start;
+	MenuButton quit;
+
+	vector<MenuButton*> buttonList;
+	vector<MenuButton*>::iterator it;
+	vector<MenuButton*>::iterator current;
 };
 

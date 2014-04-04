@@ -8,16 +8,14 @@ Text text;		//
 
 Game::Game(void)
 {
-	background.loadFromFile("background.png");
+	background.loadFromFile("gamebackground.png");
 	_background.setTexture(background);
-	score = 0;
-	enemySpawnTimer = 0;
-	shoot = 0;
-	deadtimer = 0;
-	shape.setFillColor(Color::Color(100,40,40,255));
-	shape.setPosition(600,0);
 	tex = &texture;
 	texture.loadFromFile("game.png");
+
+	shape.setFillColor(Color::Color(100,40,40,255));
+	shape.setPosition(600,0);
+	
 	player.initialize(Vector2f(268,600), 25, tex, IntRect(0,0,64,64));
 
 	font.loadFromFile("arial.ttf");		//
@@ -27,7 +25,10 @@ Game::Game(void)
 	text.setStyle(Text::Regular);		//
 	text.setPosition(605, 0);			//
 	text.setString("Game over!");		//
-
+	
+	score = 0;
+	enemySpawnTimer = 0;
+	deadtimer = 0;
 }
 
 
@@ -111,16 +112,7 @@ void Game::updateEnemy(float dt)
 
 void Game::updateBullet(float dt)
 {
-	if(Keyboard::isKeyPressed(Keyboard::Space))
-	{
-		if(shoot <= 0)
-		{	
-			BulletEngine::shoot(player.getPosition(), 30, player.getRotation(), tex);
-			shoot=1.5;
-		}
-	}
 	BulletEngine::update(dt);
-	shoot-=dt;
 }
 
 void Game::collision()

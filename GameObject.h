@@ -24,8 +24,9 @@ public:
 protected:
 	Texture* tex;
 	Vector2f position;
-	float speed;
 	Sprite sprite;
+
+	float speed;
 	bool dead;
 };
 

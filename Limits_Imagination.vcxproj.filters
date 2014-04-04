@@ -54,8 +54,11 @@
     <ClCompile Include="BulletEngine.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="MenuParent.cpp">
+    <ClCompile Include="Pausemenu.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuButton.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +92,11 @@
     <ClInclude Include="BulletEngine.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="MenuParent.h">
+    <ClInclude Include="Pausemenu.h">
       <Filter>Scenes\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuButton.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

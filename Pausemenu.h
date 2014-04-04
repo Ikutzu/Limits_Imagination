@@ -1,20 +1,22 @@
 #pragma once
+#include "SFML\Graphics.hpp"
 #include "scene.h"
 
 
 
-class MenuParent :
+class Pausemenu :
 	public Scene
 {
 public:
-	MenuParent(void);
-	~MenuParent(void);
+	Pausemenu(void);
+	~Pausemenu(void);
 
 	void update(float dt);
 	void draw(RenderWindow* window);
 
 private:
 
+	Sprite sprite;
 
 };
 

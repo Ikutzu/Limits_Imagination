@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Bullet.h"
+#include "BulletEngine.h"
 
 #include <SFML\System.hpp>
 #include <SFML\Graphics.hpp>
@@ -23,5 +23,6 @@ public:
 	FloatRect hitbox;
 private:
 	float scale;
+	float shoot;
 };
 

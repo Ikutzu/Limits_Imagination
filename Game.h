@@ -33,7 +33,6 @@ private:
 	Texture* tex;
 
 	float enemySpawnTimer;
-	float shoot;
 	float deadtimer;
 
 	Player player;

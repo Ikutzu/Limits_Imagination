@@ -8,7 +8,6 @@ GameObject::GameObject(Vector2f position, Texture* tex, IntRect sprite)
 {
 	this->position = position;
 	speed = 0;
-	this->tex = tex;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
 	this->sprite.setOrigin(sprite.width/2, sprite.height/2);

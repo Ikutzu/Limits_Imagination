@@ -3,14 +3,9 @@
 
 Player::Player()
 {}
-/*
-Player::Player(Vector2f position, float speed, Texture *tex, IntRect sprite) : GameObject(position, speed, tex, sprite)
-{
-}
-*/
+
 Player::~Player(void)
-{
-}
+{}
 
 void Player::update(float dt)
 {
@@ -34,7 +29,16 @@ void Player::update(float dt)
 		position.y += 1*speed*dt;
 		cout << "S is down" << endl;
 	}
-
+	if(Keyboard::isKeyPressed(Keyboard::Space))
+	{
+		if(shoot <= 0)
+		{	
+			BulletEngine::shoot(position, 30, sprite.getRotation(), tex);
+			shoot=1.5;
+		}
+	}
+	
+	shoot-=dt;
 	sprite.setPosition(position);
 		
 	hitbox.top = sprite.getGlobalBounds().top + (sprite.getLocalBounds().height * scale);
@@ -59,4 +63,6 @@ void Player::initialize(Vector2f position, float speed, Texture* tex, IntRect sp
 	scale = 10; // prosenttia spriten koosta
 	scale = 100-scale;
 	scale *= 0.005;
+
+	shoot = 1.5;
 }
