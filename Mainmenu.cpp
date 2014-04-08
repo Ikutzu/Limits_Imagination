@@ -7,15 +7,20 @@ Mainmenu::Mainmenu(void)
 
 	texture.loadFromFile("menu.png");
 	tex = &texture;
-	start.initialize(Vector2f(300, 360), tex, IntRect(0,0,256,64), IntRect(0,65, 256, 64));
+
+	start.initialize(Vector2f(300, 360), tex, IntRect(0,0,128,64), IntRect(128,0, 128, 64));
 	start.setAction(MenuButton::_action::START);
-	quit.initialize(Vector2f(300, 450), tex, IntRect(0,64, 256, 64), IntRect(0,0,256,64));
+	start.setSelected(true);
+
+	quit.initialize(Vector2f(300, 450), tex, IntRect(0,64,128, 64), IntRect(128,64,128,64));
 	quit.setAction(MenuButton::_action::QUIT);
+
 	MenuButton* pointer = &start;
 	buttonList.push_back(pointer);
 	pointer = &quit;
 	buttonList.push_back(pointer);
 	current = buttonList.begin();
+	holdTimer = 0;
 }
 
 Mainmenu::~Mainmenu(void)
@@ -25,11 +30,17 @@ Mainmenu::~Mainmenu(void)
 void Mainmenu::update(float dt)
 {
 	switchButton();
+	
+	if(Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::S))
+		holdTimer += dt;
+	if(!Keyboard::isKeyPressed(Keyboard::W) && !Keyboard::isKeyPressed(Keyboard::S))
+		holdTimer = 5;
+
 	for(it = buttonList.begin(); it != buttonList.end();it++)
 	{
 		if((*it)->update(dt))
 		{
-			buttonPress();
+			buttonPress((*it)->action());
 			break;
 		}
 	}
@@ -45,9 +56,8 @@ void Mainmenu::draw(RenderWindow* window)
 		(*it)->draw(window);
 }
 
-void Mainmenu::buttonPress()
+void Mainmenu::buttonPress(MenuButton::_action action)
 {
-	MenuButton::_action action = MenuButton::_action::START;
 	switch (action)
 	{
 		case MenuButton::_action::START:
@@ -66,18 +76,21 @@ void Mainmenu::buttonPress()
 
 void Mainmenu::switchButton()
 {
-	if(Keyboard::isKeyPressed(Keyboard::W))
+	if(Keyboard::isKeyPressed(Keyboard::W) && holdTimer >= 5)
 	{
+		holdTimer = 0;
 		(*current)->setSelected(false);
+		
 		if(current == buttonList.begin())
-		{
 			current = buttonList.end();
-			current--;
-		}
+		
+		current--;
+				
 		(*current)->setSelected(true);
 	}
-	if(Keyboard::isKeyPressed(Keyboard::S))
+	if(Keyboard::isKeyPressed(Keyboard::S) && holdTimer >= 5)
 	{
+		holdTimer = 0;
 		(*current)->setSelected(false);
 		current++;
 		if(current == buttonList.end())

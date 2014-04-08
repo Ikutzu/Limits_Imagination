@@ -18,11 +18,13 @@ public:
 	void update(float dt);
 	void draw(RenderWindow* window);
 
-	void buttonPress();
+	void buttonPress(MenuButton::_action action);
 	void switchButton();
 
 private:
 	
+	float holdTimer;
+
 	Sprite _background;
 	Texture background;
 

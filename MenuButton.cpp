@@ -15,6 +15,7 @@ void MenuButton::initialize(Vector2f pos, Texture *tex, IntRect _idle, IntRect _
 	sprite.setTextureRect(this->idle);
 	sprite.setOrigin(idle.width*0.5,idle.height*0.5);
 	sprite.setPosition(pos);
+	selected = false;
 
 }
 
@@ -29,7 +30,7 @@ bool MenuButton::update(float dt)
 			return true;
 		}
 	}
-	else
+	else if(!selected)
 		sprite.setTextureRect(idle);
 	
 	return false;

@@ -13,7 +13,7 @@ public:
 	~MenuButton();
 	
 	enum _action	{	
-						START, 
+						START,
 						QUIT
 					};
 

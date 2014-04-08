@@ -93,7 +93,7 @@ void Game::updateEnemy(float dt)
 		
 		if((*eit)->getShootTimer() <= 0)
 		{
-			BulletEngine::shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 1);
+			BulletEngine::shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 40);
 			(*eit)->setShootTimer(5);
 		}
 
