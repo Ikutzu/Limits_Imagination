@@ -5,7 +5,7 @@
 #include "Enemy.h"
 #include "Bullet.h"
 #include "BulletEngine.h"
-#include "Mainmenu.h"
+#include "Pausemenu.h"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>

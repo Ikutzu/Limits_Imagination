@@ -23,7 +23,6 @@ bool MenuButton::update(float dt)
 {
 	if(selected)
 	{
-		cout << "asdasd" << endl;
 		sprite.setTextureRect(hover);
 		if(Keyboard::isKeyPressed(Keyboard::Space))
 		{

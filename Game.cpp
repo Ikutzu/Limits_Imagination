@@ -6,6 +6,7 @@ RectangleShape shape(Vector2f(300, 720));
 Font font;		//
 Text text;		//
 
+
 Game::Game(void)
 {
 	background.loadFromFile("gamebackground.png");
@@ -39,6 +40,10 @@ Game::~Game(void)
 
 void Game::update(float dt)
 {
+	if(Keyboard::isKeyPressed(Keyboard::P))
+	{
+		SceneSystem::changeScene(new Pausemenu);
+	}
 	updateBullet(dt);
 	updateEnemy(dt);
 	player.update(dt);
@@ -46,7 +51,7 @@ void Game::update(float dt)
 	{
 		if(deadtimer > 15)
 		{
-			SceneSystem::changeScene(new Mainmenu);
+			SceneSystem::closeScene();
 		}
 		deadtimer += dt;
 	}

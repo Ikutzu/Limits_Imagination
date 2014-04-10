@@ -33,21 +33,21 @@ void Mainmenu::update(float dt)
 	
 	if(Keyboard::isKeyPressed(Keyboard::W) || Keyboard::isKeyPressed(Keyboard::S))
 		holdTimer += dt;
-	if(!Keyboard::isKeyPressed(Keyboard::W) && !Keyboard::isKeyPressed(Keyboard::S))
+	if( !Keyboard::isKeyPressed(Keyboard::W) && 
+		!Keyboard::isKeyPressed(Keyboard::S) )
 		holdTimer = 5;
 
-	for(it = buttonList.begin(); it != buttonList.end();it++)
-	{
-		if((*it)->update(dt))
+		for(it = buttonList.begin(); it != buttonList.end();it++)
 		{
-			buttonPress((*it)->action());
-			break;
+			if((*it)->update(dt))
+			{
+				buttonPress((*it)->action());
+				break;
+			}
 		}
-	}
-	if(Keyboard::isKeyPressed(Keyboard::Escape))
-		SceneSystem::closeScene();
-
-	//if(Keyboard::isKeyPressed(Keyboard::Space))//Mouse::isButtonPressed(Mouse::Left) || Keyboard::isKeyPressed(Keyboard::Space)
+		if(Keyboard::isKeyPressed(Keyboard::Escape))
+			SceneSystem::closeScene();
+	
 }
 
 void Mainmenu::draw(RenderWindow* window)

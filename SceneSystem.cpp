@@ -19,6 +19,11 @@ void SceneSystem::closeScene()
 	SceneList.shrink_to_fit();
 	sceneChanged = true;
 
+	if(SceneList.begin() != SceneList.end())
+	{
+		it = SceneList.end() -1;
+		(*it)->setActive(true);
+	}
 }
 
 void SceneSystem::pauseScene()
@@ -29,10 +34,17 @@ void SceneSystem::pauseScene()
 
 void SceneSystem::changeScene(Scene* newScene)
 {
-	closeScene();
-	it = SceneList.begin();
-	SceneList.clear();
+	pauseScene();
 	openScene(newScene);
+}
+
+void SceneSystem::MainMenu()
+{
+	it = SceneList.end();
+	while(SceneList.begin()+1 != SceneList.end())
+	{
+		closeScene();
+	}
 }
 
 void SceneSystem::update(float dt)
