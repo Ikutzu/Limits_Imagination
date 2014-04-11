@@ -14,11 +14,10 @@ class Player :
 {
 public:
 	Player();
-	// Player(Vector2f position, float speed, Texture *tex, IntRect sprite);
 	~Player(void);
 
 	void update(float dt);
-	void initialize(Vector2f position, float speed, Texture* tex, IntRect sprite);
+	void initialize(Vector2f position, float speed, IntRect sprite);
 	
 	FloatRect hitbox;
 private:

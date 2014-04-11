@@ -59,7 +59,7 @@ void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex,
 		}
 		if(bulletspeed == 0)
 			angle = 0;
-		Bullet *bullet = new Bullet(pos, bulletspeed, angle, tex, sf::IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(pos, bulletspeed, angle, sf::IntRect(64,0,16,16));
 		bullet->setHostile();
 		bulletL.push_back(bullet);
 	}
@@ -68,7 +68,7 @@ void BulletEngine::shoot(Vector2f pos, float eSpeed, float eAngle, Texture *tex,
 
 void BulletEngine::shoot(Vector2f pos, float speed, float angle, Texture *tex)
 {
-		Bullet *bullet = new Bullet(pos, speed, angle, tex, sf::IntRect(64,0,16,16));
+		Bullet *bullet = new Bullet(pos, speed, angle, sf::IntRect(64,0,16,16));
 		bulletL.push_back(bullet);
 }
 

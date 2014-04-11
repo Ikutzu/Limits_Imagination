@@ -9,9 +9,10 @@ class GameObject
 {
 public:
 	GameObject();
-	GameObject(Vector2f position, Texture* tex, IntRect sprite);
+	GameObject(Vector2f position, IntRect sprite);
 	~GameObject(void);
 
+	static void setTexture(Texture* texture);
 	void virtual update(float dt);
 	void const draw(RenderWindow* window);
 	void kill();
@@ -22,7 +23,7 @@ public:
 	FloatRect getBorders();
 
 protected:
-	Texture* tex;
+	static Texture* tex;
 	Vector2f position;
 	Sprite sprite;
 

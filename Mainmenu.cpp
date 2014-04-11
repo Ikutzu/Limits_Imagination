@@ -52,6 +52,7 @@ void Mainmenu::update(float dt)
 
 void Mainmenu::draw(RenderWindow* window)
 {
+	window->draw(_background);
 	for(it = buttonList.begin(); it != buttonList.end();it++)
 		(*it)->draw(window);
 }

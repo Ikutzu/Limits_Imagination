@@ -1,7 +1,7 @@
 #include "Bullet.h"
 #include "Globals.h"
 
-Bullet::Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite) : GameObject(position, tex, sprite)
+Bullet::Bullet(Vector2f position, float speed, float direction, IntRect sprite) : GameObject(position, sprite)
 {
 	this->speed = speed;
 	hostile = false;

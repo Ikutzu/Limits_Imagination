@@ -10,7 +10,7 @@ class Bullet :
 {
 public:
 	
-	Bullet(Vector2f position, float speed, float direction, Texture *tex, IntRect sprite);
+	Bullet(Vector2f position, float speed, float direction, IntRect sprite);
 	~Bullet(void);
 
 	void update(float dt);

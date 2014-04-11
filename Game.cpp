@@ -13,11 +13,12 @@ Game::Game(void)
 	_background.setTexture(background);
 	tex = &texture;
 	texture.loadFromFile("game.png");
-
+	GameObject::setTexture(tex);
+	
 	shape.setFillColor(Color::Color(100,40,40,255));
 	shape.setPosition(600,0);
 	
-	player.initialize(Vector2f(268,600), 25, tex, IntRect(0,0,64,64));
+	player.initialize(Vector2f(268,600), 25, IntRect(0,0,64,64));
 
 	font.loadFromFile("arial.ttf");		//
 	text.setCharacterSize(32);			//
@@ -46,7 +47,6 @@ void Game::update(float dt)
 	}
 	updateBullet(dt);
 	updateEnemy(dt);
-	player.update(dt);
 	if(player.isDead())
 	{
 		if(deadtimer > 15)
@@ -55,6 +55,9 @@ void Game::update(float dt)
 		}
 		deadtimer += dt;
 	}
+	else
+		player.update(dt);
+	
 	collision();
 }
 
@@ -83,7 +86,7 @@ void Game::updateEnemy(float dt)
 	{
 		//for(int i=0; i<3; i++)
 		//{
-			Enemy *enemy = new Enemy(Vector2f(rand()%600,0), 15, tex, IntRect(0,0,64,64));
+			Enemy *enemy = new Enemy(Vector2f(rand()%600,0), 15, IntRect(0,0,64,64));
 			enemies.push_back(enemy);
 		//}
 		enemySpawnTimer = 5;
@@ -96,12 +99,6 @@ void Game::updateEnemy(float dt)
 	{
 		(*eit)->update(dt, 90);
 		
-		if((*eit)->getShootTimer() <= 0)
-		{
-			BulletEngine::shoot((*eit)->getPosition(), (*eit)->getSpeed(), (*eit)->getRotation(), tex, 40);
-			(*eit)->setShootTimer(5);
-		}
-
 		if(!(*eit)->isDead())
 			eit++;
 		else

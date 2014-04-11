@@ -48,12 +48,11 @@ void Player::update(float dt)
 	// asd
 }
 
-void Player::initialize(Vector2f position, float speed, Texture* tex, IntRect sprite)
+void Player::initialize(Vector2f position, float speed, IntRect sprite)
 {
 	this->position = position;
 	this->speed = speed;
 
-	this->tex = tex;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
 	this->sprite.setOrigin(sprite.width/2, sprite.height/2);

@@ -1,10 +1,12 @@
 #include "GameObject.h"
 #include "Globals.h"
 
+Texture* GameObject::tex;
+
 GameObject::GameObject()
 {}
 
-GameObject::GameObject(Vector2f position, Texture* tex, IntRect sprite)
+GameObject::GameObject(Vector2f position, IntRect sprite)
 {
 	this->position = position;
 	speed = 0;
@@ -16,6 +18,11 @@ GameObject::GameObject(Vector2f position, Texture* tex, IntRect sprite)
 
 GameObject::~GameObject(void)
 {
+}
+
+void GameObject::setTexture(Texture* texture)
+{
+	tex = texture;
 }
 
 Vector2f GameObject::getPosition()

@@ -3,9 +3,6 @@
 
 Pausemenu::Pausemenu(void)
 {
-	background.loadFromFile("pausemenubackground.png");
-	_background.setTexture(background);
-
 	texture.loadFromFile("menu.png");
 	tex = &texture;
 

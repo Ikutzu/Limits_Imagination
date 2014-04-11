@@ -24,9 +24,6 @@ private:
 	
 	float holdTimer;
 
-	Sprite _background;
-	Texture background;
-
 	Texture texture;
 	Texture* tex;
 
