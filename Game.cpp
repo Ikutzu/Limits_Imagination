@@ -132,6 +132,9 @@ void Game::collision()
 		}
 		
 		if(player.hitbox.intersects((*bit)->getBorders()) && (*bit)->getHostile() && !player.isDead())
-			player.kill();
+		{
+			(*bit)->kill();
+			player.gotHit();
+		}
 	}
 }

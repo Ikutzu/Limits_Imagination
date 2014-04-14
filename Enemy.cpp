@@ -17,7 +17,7 @@ Enemy::~Enemy(void)
 
 void Enemy::update(float dt, float newAngle)
 {
-	changeAngle(newAngle*dt*0.05);
+	//changeAngle(newAngle*dt*0.05);
 	position.x += speed*dt*cos(getRotation()*degree);
 	position.y += speed*dt*sin(getRotation()*degree);
 
