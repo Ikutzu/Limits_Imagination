@@ -7,8 +7,7 @@
 
 
 
-class Pausemenu :
-	public Scene
+class Pausemenu :	public Scene
 {
 public:
 	Pausemenu(void);

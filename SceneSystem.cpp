@@ -15,6 +15,7 @@ void SceneSystem::closeScene()
 {
 	it = SceneList.end() -1;
 	(*it)->~Scene();
+	
 	SceneList.erase(it);
 	SceneList.shrink_to_fit();
 	sceneChanged = true;

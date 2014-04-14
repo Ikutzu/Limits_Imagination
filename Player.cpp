@@ -64,4 +64,12 @@ void Player::initialize(Vector2f position, float speed, IntRect sprite)
 	scale *= 0.005;
 
 	shoot = 1.5;
+	health = 5;
+}
+
+void Player::gotHit()
+{
+	health--;
+	if(health == 0)
+		kill();
 }
