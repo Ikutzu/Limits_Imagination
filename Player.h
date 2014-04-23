@@ -19,13 +19,18 @@ public:
 	void update(float dt);
 	void initialize(Vector2f position, float speed, IntRect sprite);
 	void gotHit();
+	void spaceGlue(int action);
+
+	float getHealth();
+	float getMaxHealth();
 
 	FloatRect hitbox;
 
 private:
 
-	float health;
+	float health, maxHealth;
 	float scale;
 	float shoot;
+
 };
 

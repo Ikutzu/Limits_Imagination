@@ -4,6 +4,7 @@
 Bullet::Bullet(Vector2f position, float speed, float direction, IntRect sprite) : GameObject(position, sprite)
 {
 	this->speed = speed;
+	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
 	hostile = false;
 	this->sprite.setRotation(direction);
 	angle = direction;

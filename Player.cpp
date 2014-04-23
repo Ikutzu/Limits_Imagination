@@ -57,6 +57,7 @@ void Player::initialize(Vector2f position, float speed, IntRect sprite)
 	this->sprite.setTextureRect(sprite);
 	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
 	this->sprite.setRotation(-90);
+	this->sprite.setPosition(this->position);
 	dead=false;
 	
 	scale = 10; // prosenttia spriten koosta
@@ -64,7 +65,8 @@ void Player::initialize(Vector2f position, float speed, IntRect sprite)
 	scale *= 0.005;
 
 	shoot = 1.5;
-	health = 5;
+	health = maxHealth = 5;
+
 }
 
 void Player::gotHit()
@@ -72,4 +74,25 @@ void Player::gotHit()
 	health--;
 	if(health == 0)
 		kill();
+}
+void Player::spaceGlue(int action)
+{
+	switch (action){
+
+	case 1:
+		{
+			if(health < maxHealth)
+				health++;
+			break;
+		}
+	}
+}
+float Player::getHealth()
+{
+	return health;
+}
+
+float Player::getMaxHealth()
+{
+	return maxHealth;
 }

@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "Bullet.h"
+#include "Upgrade.h"
 #include "BulletEngine.h"
 #include "Pausemenu.h"
 
@@ -36,16 +37,23 @@ private:
 	float deadtimer;
 
 	Player player;
-	
+	GameObject* healthBar;
+	Sprite healthBarBackground;
+
 	float score;
 
 	vector<Enemy*> enemies;
 	vector<Enemy*>::iterator eit;
 	
+	vector<Upgrade*> upgrades;
+	vector<Upgrade*>::iterator uit;
+
 	vector<Bullet*>::iterator bit;
 
 	void updateEnemy(float dt);
 	void updateBullet(float dt);
+	void updateUpgrades(float dt);
+	void updateHealthBar();
 	void collision();
 };
 

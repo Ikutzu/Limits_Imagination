@@ -60,6 +60,9 @@
     <ClCompile Include="MenuButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Upgrade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
@@ -96,6 +99,9 @@
       <Filter>Scenes\Headers</Filter>
     </ClInclude>
     <ClInclude Include="MenuButton.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Upgrade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -12,7 +12,7 @@ GameObject::GameObject(Vector2f position, IntRect sprite)
 	speed = 0;
 	this->sprite.setTexture(*tex);
 	this->sprite.setTextureRect(sprite);
-	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
+	this->sprite.setPosition(this->position);
 	dead=false;
 }
 
@@ -23,6 +23,11 @@ GameObject::~GameObject(void)
 void GameObject::setTexture(Texture* texture)
 {
 	tex = texture;
+}
+
+void GameObject::changeSpriteRect(IntRect newSprite)
+{
+	sprite.setTextureRect(newSprite);
 }
 
 Vector2f GameObject::getPosition()

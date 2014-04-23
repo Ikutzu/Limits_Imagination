@@ -19,6 +19,11 @@ Game::Game(void)
 	shape.setPosition(600,0);
 	
 	player.initialize(Vector2f(268,600), 25, IntRect(0,0,64,64));
+	
+	healthBar = new GameObject(Vector2f(625, 631), IntRect(80,0,250,64));
+	healthBarBackground.setTexture(texture);
+	healthBarBackground.setTextureRect(IntRect(64,64,266,80));
+	healthBarBackground.setPosition(Vector2f(617, 623));
 
 	font.loadFromFile("arial.ttf");		//
 	text.setCharacterSize(32);			//
@@ -47,6 +52,8 @@ void Game::update(float dt)
 	}
 	updateBullet(dt);
 	updateEnemy(dt);
+	updateUpgrades(dt);
+
 	if(player.isDead())
 	{
 		if(deadtimer > 15)
@@ -59,6 +66,7 @@ void Game::update(float dt)
 		player.update(dt);
 	
 	collision();
+
 }
 
 void Game::draw(RenderWindow* window)
@@ -67,11 +75,14 @@ void Game::draw(RenderWindow* window)
 	BulletEngine::draw(window);
 
 	for(eit=enemies.begin(); eit != enemies.end(); eit++)
-	{
 		(*eit)->draw(window);
-	}
+
+	for(uit=upgrades.begin(); uit != upgrades.end(); uit++)
+		(*uit)->draw(window);
 	
 	window->draw(shape);
+	window->draw(healthBarBackground);
+	healthBar->draw(window);
 
 	if(!player.isDead())		//
 		player.draw(window);	
@@ -86,7 +97,7 @@ void Game::updateEnemy(float dt)
 	{
 		//for(int i=0; i<3; i++)
 		//{
-			Enemy *enemy = new Enemy(Vector2f(rand()%600,0), 15, IntRect(0,0,64,64));
+			Enemy *enemy = new Enemy(Vector2f(rand()%536 + 32,0), 15, IntRect(0,64,64,64));
 			enemies.push_back(enemy);
 		//}
 		enemySpawnTimer = 5;
@@ -103,6 +114,11 @@ void Game::updateEnemy(float dt)
 			eit++;
 		else
 		{
+			if(rand()%10 == 0)
+			{
+				Upgrade *upgrade = new Upgrade((*eit)->getPosition(), 10, IntRect(0,128,32,32), 1);
+				upgrades.push_back(upgrade);
+			}
 			(*eit)->~Enemy();
 			eit = enemies.erase(eit);
 		}
@@ -115,6 +131,25 @@ void Game::updateEnemy(float dt)
 void Game::updateBullet(float dt)
 {
 	BulletEngine::update(dt);
+}
+
+void Game::updateUpgrades(float dt)
+{
+	for( uit = upgrades.begin(); uit != upgrades.end();)
+	{
+		(*uit)->update(dt);
+
+		if(!(*uit)->isDead())
+			uit++;
+		else
+		{
+			(*uit)->~Upgrade();
+			uit = upgrades.erase(uit);
+		}
+	}
+
+	upgrades.shrink_to_fit();
+	
 }
 
 void Game::collision()
@@ -135,6 +170,25 @@ void Game::collision()
 		{
 			(*bit)->kill();
 			player.gotHit();
+			updateHealthBar();
 		}
 	}
+	
+	auto thingmabob = upgrades;
+
+	for(uit = thingmabob.begin(); uit != thingmabob.end(); uit++)
+	{
+		if((*uit)->getBorders().intersects(player.hitbox))
+		{
+			player.spaceGlue((*uit)->getAction());
+			(*uit)->kill();
+			updateHealthBar();
+		}
+	}
+	
+}
+
+void Game::updateHealthBar()
+{
+	healthBar->changeSpriteRect(IntRect(80,0,250*(player.getHealth()/player.getMaxHealth()),64));
 }

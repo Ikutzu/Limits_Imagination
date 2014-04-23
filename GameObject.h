@@ -13,6 +13,7 @@ public:
 	~GameObject(void);
 
 	static void setTexture(Texture* texture);
+	void changeSpriteRect(IntRect newSprite);
 	void virtual update(float dt);
 	void const draw(RenderWindow* window);
 	void kill();
@@ -21,6 +22,7 @@ public:
 	float getRotation();
 	Vector2f getPosition();
 	FloatRect getBorders();
+	
 
 protected:
 	static Texture* tex;
