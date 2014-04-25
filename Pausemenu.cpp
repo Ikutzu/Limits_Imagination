@@ -39,7 +39,7 @@ void Pausemenu::update(float dt)
 		}
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Escape) )
-		SceneSystem::closeScene();
+		SceneSystem::MainMenu();
 	
 }
 

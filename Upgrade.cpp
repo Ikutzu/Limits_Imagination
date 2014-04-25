@@ -2,11 +2,36 @@
 #include "Globals.h"
 
 
-Upgrade::Upgrade(Vector2f position, float speed, IntRect sprite, int action) : GameObject(position, sprite)
+Upgrade::Upgrade(Vector2f position, float speed, int action) : GameObject(position, IntRect(0,0,0,0))
 {
 	this->speed = speed;
-	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
 	this->action = action;
+	
+	switch (action)
+	{
+	case 1: // recover health
+		{
+			sprite.setTextureRect(IntRect(64,144,32,32));
+			break;
+		}
+	case 2: // increase health
+		{
+			sprite.setTextureRect(IntRect(96,144,32,32));
+			break;
+		}
+	case 3: // faster shooting
+		{
+			sprite.setTextureRect(IntRect(128,144,32,32));
+			break;
+		}
+	case 4: // faster movement
+		{
+			sprite.setTextureRect(IntRect(160,144,32,32));
+			break;
+		}
+	}
+
+	this->sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);
 	this->sprite.setRotation(90);
 }
 

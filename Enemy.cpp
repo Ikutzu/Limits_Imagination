@@ -8,6 +8,7 @@ Enemy::Enemy(Vector2f position, float speed, IntRect sprite) : GameObject(positi
 	this->sprite.setOrigin(sprite.width/2, sprite.height/2);
 	this->sprite.setRotation(90);
 	shootTimer = 5;
+	health = 3;
 }
 
 
@@ -18,7 +19,11 @@ Enemy::~Enemy(void)
 
 void Enemy::update(float dt, float newAngle)
 {
-	//changeAngle(newAngle*dt*0.05);
+	if(dead)
+		BulletEngine::shrapnell(this->position, this->speed*-1, this->sprite.getRotation(), 8, sprite.getTextureRect());
+	
+	else{
+	changeAngle(newAngle*dt*0.05);
 	position.x += speed*dt*cos(getRotation()*degree);
 	position.y += speed*dt*sin(getRotation()*degree);
 
@@ -29,10 +34,11 @@ void Enemy::update(float dt, float newAngle)
 		dead = true;
 	if(shootTimer <= 0)
 		{
-			BulletEngine::shoot(this->position, this->speed, this->sprite.getRotation(), tex, 4);
+			BulletEngine::shoot(this->position, this->speed, 1, this->sprite.getRotation(), 4);
 			shootTimer = 15;
 		}
 	shootTimer -= dt;
+	}
 }
 
 void Enemy::changeAngle(float newAngle)
@@ -43,4 +49,12 @@ void Enemy::changeAngle(float newAngle)
 	if(position.x > 300)
 		sprite.setRotation(sprite.getRotation()+ newAngle);
 		
+}
+
+void Enemy::gotHit(float damage)
+{
+	health -= damage;
+
+	if(health <= 0)
+		kill();
 }

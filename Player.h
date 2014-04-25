@@ -18,7 +18,7 @@ public:
 
 	void update(float dt);
 	void initialize(Vector2f position, float speed, IntRect sprite);
-	void gotHit();
+	void gotHit(float dmg);
 	void spaceGlue(int action);
 
 	float getHealth();
@@ -28,9 +28,12 @@ public:
 
 private:
 
+	float damage;
+	float immunity, _immunity;
 	float health, maxHealth;
+	float shoot, shootSpeed;
 	float scale;
-	float shoot;
+	
 
 };
 

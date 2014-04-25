@@ -45,9 +45,6 @@ void Mainmenu::update(float dt)
 				break;
 			}
 		}
-		if(Keyboard::isKeyPressed(Keyboard::Escape))
-			SceneSystem::closeScene();
-	
 }
 
 void Mainmenu::draw(RenderWindow* window)

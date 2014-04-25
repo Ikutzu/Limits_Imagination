@@ -7,6 +7,7 @@
 #include "Upgrade.h"
 #include "BulletEngine.h"
 #include "Pausemenu.h"
+#include "Shrapnell.h"
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
@@ -49,6 +50,7 @@ private:
 	vector<Upgrade*>::iterator uit;
 
 	vector<Bullet*>::iterator bit;
+	vector<Shrapnell*>::iterator shit;
 
 	void updateEnemy(float dt);
 	void updateBullet(float dt);

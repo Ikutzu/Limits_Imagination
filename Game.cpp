@@ -53,7 +53,7 @@ void Game::update(float dt)
 	updateBullet(dt);
 	updateEnemy(dt);
 	updateUpgrades(dt);
-
+	collision();
 	if(player.isDead())
 	{
 		if(deadtimer > 15)
@@ -65,17 +65,18 @@ void Game::update(float dt)
 	else
 		player.update(dt);
 	
-	collision();
+	
 
 }
 
 void Game::draw(RenderWindow* window)
 {		
 	window->draw(_background);
-	BulletEngine::draw(window);
 
 	for(eit=enemies.begin(); eit != enemies.end(); eit++)
 		(*eit)->draw(window);
+	
+	BulletEngine::draw(window);
 
 	for(uit=upgrades.begin(); uit != upgrades.end(); uit++)
 		(*uit)->draw(window);
@@ -116,10 +117,11 @@ void Game::updateEnemy(float dt)
 		{
 			if(rand()%10 == 0)
 			{
-				Upgrade *upgrade = new Upgrade((*eit)->getPosition(), 10, IntRect(0,128,32,32), 1);
+				Upgrade *upgrade = new Upgrade((*eit)->getPosition(), 10, rand()%4+1);
 				upgrades.push_back(upgrade);
 			}
-			(*eit)->~Enemy();
+			
+			delete *eit;
 			eit = enemies.erase(eit);
 		}
 	}
@@ -143,7 +145,7 @@ void Game::updateUpgrades(float dt)
 			uit++;
 		else
 		{
-			(*uit)->~Upgrade();
+			delete *uit;
 			uit = upgrades.erase(uit);
 		}
 	}
@@ -161,15 +163,41 @@ void Game::collision()
 			if((*eit)->getBorders().intersects((*bit)->getBorders()) && !(*bit)->getHostile())
 			{
 				score += 100;
-				(*eit)->kill();
+				(*eit)->gotHit((*bit)->getDamage());
 				(*bit)->kill();
 			}
+			if((*eit)->getBorders().intersects(player.hitbox) && !player.isDead())
+			{
+				(*eit)->kill();
+				player.gotHit(2);
+				updateHealthBar();
+			}
+			/*
+			for(shit = BulletEngine::shrapnellL.begin(); shit != BulletEngine::shrapnellL.end(); shit++)
+			{
+				if((*eit)->getBorders().intersects((*shit)->getBorders()))
+				{
+					IntRect tesmi;
+					tesmi.left = (*shit)->getBorders().left;
+					tesmi.top = (*shit)->getBorders().top;
+					tesmi.width = (*shit)->getBorders().width;
+					tesmi.height = (*shit)->getBorders().height;
+					
+					Vector2f vectortesmi(4,4);// = (*shit)->getPosition();
+					float nopeustesmi = 10;//(*shit)->getSpeed();
+					float rotatiotesmi = 10;//(*shit)->getRotation();
+					
+
+					//BulletEngine::shrapnell(vectortesmi, nopeustesmi, rotatiotesmi, 20, tesmi);
+					(*shit)->kill();
+				}
+			}*/
+			
 		}
-		
 		if(player.hitbox.intersects((*bit)->getBorders()) && (*bit)->getHostile() && !player.isDead())
 		{
 			(*bit)->kill();
-			player.gotHit();
+			player.gotHit((*bit)->getDamage());
 			updateHealthBar();
 		}
 	}
@@ -190,5 +218,9 @@ void Game::collision()
 
 void Game::updateHealthBar()
 {
-	healthBar->changeSpriteRect(IntRect(80,0,250*(player.getHealth()/player.getMaxHealth()),64));
+	int width = 250*(player.getHealth()/player.getMaxHealth());
+	if (width < 0 || width > 250)
+		width = 0;
+
+	healthBar->changeSpriteRect(IntRect(80,0,width,64));
 }

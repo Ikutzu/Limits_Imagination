@@ -5,7 +5,7 @@ class Upgrade :
 	public GameObject
 {
 public:
-	Upgrade(Vector2f position, float speed, IntRect sprite, int action);
+	Upgrade(Vector2f position, float speed, int action);
 	~Upgrade(void);
 
 	void update(float dt);

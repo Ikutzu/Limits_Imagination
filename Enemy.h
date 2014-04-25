@@ -11,6 +11,7 @@ public:
 
 	void update(float dt, float newAngle);
 	void changeAngle(float newAngle);
+	void gotHit(float damage);
 
 private:
 	float health;

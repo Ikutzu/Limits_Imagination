@@ -12,32 +12,31 @@ void Player::update(float dt)
 	if(Keyboard::isKeyPressed(Keyboard::A) && position.x > GAME_WINDOW.left+this->getBorders().width * 0.5)
 		{
 			position.x -= 1*speed*dt;
-			cout << "A is down" << endl;
 		}
 	if(Keyboard::isKeyPressed(Keyboard::D) && position.x < GAME_WINDOW.width-this->getBorders().width * 0.5)
 		{
 			position.x += 1*speed*dt;
-			cout << "D is down" << endl;
 		}
 	if(Keyboard::isKeyPressed(Keyboard::W) && position.y > GAME_WINDOW.top + this->getBorders().height * 0.5)
 		{
 			position.y -= 1*speed*dt;
-			cout << "W is down" << endl;
 		}
 	if(Keyboard::isKeyPressed(Keyboard::S) && position.y < GAME_WINDOW.height -this->getBorders().height * 0.5)
 	{
 		position.y += 1*speed*dt;
-		cout << "S is down" << endl;
 	}
 	if(Keyboard::isKeyPressed(Keyboard::Space))
 	{
 		if(shoot <= 0)
 		{	
-			BulletEngine::shoot(position, 30, sprite.getRotation(), tex);
-			shoot=1.5;
+			BulletEngine::shoot(position, 30, damage, sprite.getRotation());
+			shoot=shootSpeed;
 		}
 	}
 	
+	if(immunity > 0)
+		immunity -= dt;
+
 	shoot-=dt;
 	sprite.setPosition(position);
 		
@@ -64,25 +63,55 @@ void Player::initialize(Vector2f position, float speed, IntRect sprite)
 	scale = 100-scale;
 	scale *= 0.005;
 
-	shoot = 1.5;
+	shoot = shootSpeed = 1.5;
+	damage = 1;
+
 	health = maxHealth = 5;
+	immunity = _immunity = 5;
 
 }
 
-void Player::gotHit()
+void Player::gotHit(float dmg)
 {
-	health--;
-	if(health == 0)
+	if(immunity <= 0)
+	{
+		health -= dmg;
+		immunity = _immunity;
+	}
+
+	if(health <= 0)
+	{
 		kill();
+		health = 0;
+	}
 }
 void Player::spaceGlue(int action)
 {
 	switch (action){
 
-	case 1:
+	case 1: // recover health
 		{
 			if(health < maxHealth)
 				health++;
+			break;
+		}
+	case 2: // increase health
+		{
+			maxHealth++;
+			if(health < maxHealth)
+				health++;
+			break;
+		}
+	case 3: // faster shooting
+		{
+			if(shootSpeed > 0.75)
+				shootSpeed -= 0.3;
+			break;
+		}
+	case 4: // faster movement
+		{
+			if(speed < 50)
+				speed += 5;
 			break;
 		}
 	}
