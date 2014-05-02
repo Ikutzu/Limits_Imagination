@@ -36,6 +36,7 @@ Game::Game(void)
 	score = 0;
 	enemySpawnTimer = 0;
 	deadtimer = 0;
+	gameTimer = 0;
 }
 
 
@@ -46,6 +47,7 @@ Game::~Game(void)
 
 void Game::update(float dt)
 {
+	cout << score << endl;
 	if(Keyboard::isKeyPressed(Keyboard::P))
 	{
 		SceneSystem::changeScene(new Pausemenu);
@@ -94,7 +96,7 @@ void Game::draw(RenderWindow* window)
 
 void Game::updateEnemy(float dt)
 {
-	if(enemySpawnTimer <= 0)
+	if(enemySpawnTimer <= 0 && gameTimer <= 600)
 	{
 		//for(int i=0; i<3; i++)
 		//{
@@ -105,6 +107,7 @@ void Game::updateEnemy(float dt)
 		cout << "Enemy Spawns!!" << endl;
 	}
 	
+	gameTimer += dt;
 	enemySpawnTimer-=dt;
 
 	for(eit=enemies.begin(); eit != enemies.end(); )
@@ -123,6 +126,7 @@ void Game::updateEnemy(float dt)
 			
 			delete *eit;
 			eit = enemies.erase(eit);
+			score += 100;
 		}
 	}
 	
@@ -162,7 +166,6 @@ void Game::collision()
 		{
 			if((*eit)->getBorders().intersects((*bit)->getBorders()) && !(*bit)->getHostile())
 			{
-				score += 100;
 				(*eit)->gotHit((*bit)->getDamage());
 				(*bit)->kill();
 			}

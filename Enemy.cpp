@@ -20,7 +20,7 @@ Enemy::~Enemy(void)
 void Enemy::update(float dt, float newAngle)
 {
 	if(dead)
-		BulletEngine::shrapnell(this->position, this->speed*-1, this->sprite.getRotation(), 8, sprite.getTextureRect());
+		BulletEngine::shrapnell(this->position, this->speed*-1, this->sprite.getRotation(), 4, sprite.getTextureRect());
 	
 	else{
 	changeAngle(newAngle*dt*0.05);

@@ -42,6 +42,7 @@ private:
 	Sprite healthBarBackground;
 
 	float score;
+	float gameTimer;
 
 	vector<Enemy*> enemies;
 	vector<Enemy*>::iterator eit;

@@ -14,5 +14,5 @@ private:
 
 	float angle;
 	float spin;
-	float damage;
+	float lifetime;
 };
