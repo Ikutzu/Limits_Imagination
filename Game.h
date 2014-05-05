@@ -2,6 +2,7 @@
 #include "Scene.h"
 #include "SceneSystem.h"
 #include "Player.h"
+#include "Boss.h"
 #include "Enemy.h"
 #include "Bullet.h"
 #include "Upgrade.h"
@@ -12,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <sstream>
 
 using namespace std;
 using namespace sf;
@@ -43,7 +45,10 @@ private:
 
 	float score;
 	float gameTimer;
+	float bossTime;
 
+	Boss boss;
+	
 	vector<Enemy*> enemies;
 	vector<Enemy*>::iterator eit;
 	

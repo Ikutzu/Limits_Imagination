@@ -29,6 +29,11 @@ Upgrade::Upgrade(Vector2f position, float speed, int action) : GameObject(positi
 			sprite.setTextureRect(IntRect(160,144,32,32));
 			break;
 		}
+	case 5: // more damage
+		{
+			sprite.setTextureRect(IntRect(192,144,32,32));
+			break;
+		}
 	}
 
 	this->sprite.setOrigin(sprite.getLocalBounds().width/2, sprite.getLocalBounds().height/2);

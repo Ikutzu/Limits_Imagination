@@ -114,6 +114,12 @@ void Player::spaceGlue(int action)
 				speed += 5;
 			break;
 		}
+	case 5: // more damage
+		{
+			if(damage < 5)
+				damage += 1;
+			break;
+		}
 	}
 }
 float Player::getHealth()
