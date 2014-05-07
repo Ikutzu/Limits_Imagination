@@ -6,7 +6,7 @@ Pausemenu::Pausemenu(void)
 	texture.loadFromFile("menu.png");
 	tex = &texture;
 
-	quit.initialize(Vector2f(300, 450), tex, IntRect(0,0,128, 64), IntRect(128,0,128,64));
+	quit.initialize(Vector2f(740, 450), tex, IntRect(0,128,256, 96), IntRect(0,128,256,96));
 	quit.setAction(MenuButton::_action::QUIT);
 	quit.setSelected(true);
 

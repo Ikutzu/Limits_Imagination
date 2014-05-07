@@ -33,12 +33,12 @@ void Boss::initialize(Vector2f position, float speed, IntRect sprite)
 	rgun.setOrigin(gunsprite.width/2, gunsprite.height/2);
 	rgun.setRotation(90);
 
-	shootTimer = defShootTimer = 5;
+	shootTimer = defShootTimer = 10;
 	encounterTimer = 0;
 	moveTimer = defMoveTimer = 10;
 	phase = 0;
 
-	hullHealth = lHealth = rHealth = 10;
+	hullHealth = lHealth = rHealth = 100;
 }
 
 
@@ -83,9 +83,9 @@ void Boss::update(float dt)
 				if(shootTimer <= 0)
 				{
 					if(!lgundead)
-						BulletEngine::shoot(lgun.getPosition(), 15, 2, 90, 1); 
+						BulletEngine::shoot(lgun.getPosition(), 15, 2, 90, 10); 
 					if(!rgundead)
-						BulletEngine::shoot(rgun.getPosition(), 15, 2, 90, 1);
+						BulletEngine::shoot(rgun.getPosition(), 15, 2, 90, 10);
 
 					shootTimer = defShootTimer;
 				}
@@ -109,9 +109,9 @@ void Boss::update(float dt)
 				if(shootTimer <= 0)
 				{
 					if(!lgundead)
-						BulletEngine::shoot(lgun.getPosition(), 15, 2, 90, 1); 
+						BulletEngine::shoot(lgun.getPosition(), 15, 2, 90, 10); 
 					if(!rgundead)
-						BulletEngine::shoot(rgun.getPosition(), 15, 2, 90, 1);
+						BulletEngine::shoot(rgun.getPosition(), 15, 2, 90, 10);
 
 					shootTimer = defShootTimer;
 				}

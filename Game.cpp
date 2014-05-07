@@ -51,7 +51,7 @@ Game::Game(void)
 	scoretext.setPosition(605, 40);
 	
 	score = 0;
-	bossTime = 50; /////////////////////////
+	bossTime = 300; /////////////////////////
 	enemySpawnTimer = 0;
 	deadtimer = 0;
 	gameTimer = 0;
@@ -161,7 +161,7 @@ void Game::updateEnemy(float dt)
 			eit++;
 		else
 		{
-			if(rand()%10 == 0)
+			if(rand()%5 == 0)
 			{
 				Upgrade *upgrade = new Upgrade((*eit)->getPosition(), 10, rand()%5+1);
 				upgrades.push_back(upgrade);
